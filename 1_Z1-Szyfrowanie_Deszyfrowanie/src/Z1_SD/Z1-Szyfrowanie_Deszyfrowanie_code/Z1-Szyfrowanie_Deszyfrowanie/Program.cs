@@ -62,12 +62,12 @@ namespace EncryptionConsoleApp
             switch (IDP)
             {
                 default:
-                    WyborAlgorytmuAESlubDES(); break;
+                    WyborAlgorytmuAESlubDES(SciezkaPlikuDoWczytania, SciezkaPlikuDoZapisania); break;
             }
 
             return (SciezkaPlikuDoWczytania, SciezkaPlikuDoZapisania);
         }
-        public static SymmetricAlgorithm WyborAlgorytmuAESlubDES()
+        public static void WyborAlgorytmuAESlubDES(string SciezkaPlikuDoWczytania, string SciezkaPlikuDoZapisania)
         {
             Console.WriteLine("=> Wybierz algorytm szyfrujący AES bądź DES:" +
                 "\n(1) AES (aby wybrać algorytm AES wpisz AES lub nieparzystą liczbę jednocyfrową, czyli: AES, 1, 3, 5, 7 lub 9)" +
@@ -75,7 +75,7 @@ namespace EncryptionConsoleApp
             string WybórAlgorytmu = Convert.ToString(Console.ReadLine());
 
             string NazwaAlgorytmu;
-            SymmetricAlgorithm Algorytm;
+            SymmetricAlgorithm Algorytm = null;
 
             if (WybórAlgorytmu == "AES" || WybórAlgorytmu == "1" || WybórAlgorytmu == "3" || WybórAlgorytmu == "5" || WybórAlgorytmu == "7" || WybórAlgorytmu == "9")
             {
@@ -90,33 +90,14 @@ namespace EncryptionConsoleApp
             }
             else
             {
-                BladPrzyWyborzeAlgorytmu();
-                return null;
+                Console.WriteLine("\nNie został wybrany żaden algorytm... należy powtórzyć działanie.\n");
+                BladPrzyWyborzeAlgorytmuLubPrzyPliku();
+                NazwaAlgorytmu = "";
             }
 
             Console.WriteLine($"\nWybrano następujący algorytm szyfrujący: {NazwaAlgorytmu}");
-            return Algorytm;
 
-        }
-        public static void BladPrzyWyborzeAlgorytmu()
-        {
-            Console.WriteLine("\nNie został wybrany żaden algorytm... należy powtórzyć działanie.\n");
-
-            Console.WriteLine("Wciśnij cokolwiek w celu ponownego wybrania algorytmu...");
-            string IDP;
-            IDP = Convert.ToString(Console.ReadLine());
-            switch (IDP)
-            {
-                default:
-                    WyborAlgorytmuAESlubDES(); break;
-            }
-        }
-        public static void CzySzyfrowacCzyDeszyfrowac()
-        {
-            SymmetricAlgorithm Algorytm = WyborAlgorytmuAESlubDES();
-            (string SciezkaPlikuDoWczytania, string SciezkaPlikuDoZapisania) = SzyfrowanieDeszyfrowanieTekstuPliku();
-
-            Console.WriteLine("=> Będziemy szyfrować czy deszyfrować następujący plik?" +
+            Console.WriteLine("\n=> Będziemy szyfrować czy deszyfrować następujący plik?" +
                 "\n(1) Aby wykonać szyfrowanie wpisz '1' lub 'szyfr'" +
                 "\n(2) Aby wykonać szyfrowanie wpisz '2' lub 'deszyfr'");
             string WyborSzyfrowaniaLubDeszyfrowania = Console.ReadLine();
@@ -130,11 +111,13 @@ namespace EncryptionConsoleApp
 
                     File.WriteAllBytes(SciezkaPlikuDoZapisania, ZaszyfrowaneDanePliku);
 
+                    Console.WriteLine("\n/// /// /// /// /// /// /// /// ///");
                     Console.WriteLine("Szyfrowanie zakończone sukcesem!");
+                    Console.WriteLine("/// /// /// /// /// /// /// /// ///");
                 }
                 else
                 {
-                    Console.WriteLine("\nBrak wczytanego pliku...");
+                    Console.WriteLine("\nBrak wczytanego pliku... należy powtórzyć działanie programu\n"); BladPrzyWyborzeAlgorytmuLubPrzyPliku();
                 }
 
             }
@@ -147,74 +130,88 @@ namespace EncryptionConsoleApp
 
                     File.WriteAllBytes(SciezkaPlikuDoZapisania, OdszyfrowaneDanePliku);
 
+                    Console.WriteLine("\n/// /// /// /// /// /// /// /// ///");
                     Console.WriteLine("Deszyfrowanie zakończone sukcesem!");
+                    Console.WriteLine("/// /// /// /// /// /// /// /// ///");
                 }
                 else
                 {
-                    Console.WriteLine("\nBrak wczytanego pliku...");
+                    Console.WriteLine("\nBrak wczytanego pliku... należy powtórzyć działanie programu\n"); BladPrzyWyborzeAlgorytmuLubPrzyPliku();
                 }
             }
             else
             {
-                Console.WriteLine("Brak pliku bądź nie wybrano odpowiedniej opcji...");
+                Console.WriteLine("Brak pliku bądź nie wybrano odpowiedniej opcji... należy powtórzyć działanie programu\n"); BladPrzyWyborzeAlgorytmuLubPrzyPliku();
             }
 
         }
-        static byte[] EncryptData(SymmetricAlgorithm algorithm, byte[] data)
+        public static void BladPrzyWyborzeAlgorytmuLubPrzyPliku()
         {
-            algorithm.GenerateKey();
-            algorithm.GenerateIV();
-
-            byte[] key = algorithm.Key;
-            byte[] iv = algorithm.IV;
-
-            ICryptoTransform encryptor = algorithm.CreateEncryptor(key, iv);
-
-            byte[] encryptedData;
-
-            using (MemoryStream memoryStream = new MemoryStream())
+            Console.WriteLine("Wciśnij cokolwiek w celu powtórzenia działania programu...");
+            string IDP;
+            IDP = Convert.ToString(Console.ReadLine());
+            switch (IDP)
             {
-                using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
+                default:
+                    InstrukcjaDzialaniaProgramu(); break;
+            }
+        }
+
+        static byte[] EncryptData(SymmetricAlgorithm Algorytm, byte[] data)
+        {
+            Algorytm.GenerateKey();
+            Algorytm.GenerateIV();
+
+            byte[] KluczSzyfrujacy = Algorytm.Key;
+            byte[] KluczaWartoscIV = Algorytm.IV;
+
+            ICryptoTransform NarzędzieSzyfrujące = Algorytm.CreateEncryptor(KluczSzyfrujacy, KluczaWartoscIV);
+
+            byte[] ZaszyfrowaneDanePliku;
+
+            using (MemoryStream PrzechowywanieStrumieniaBajtow = new MemoryStream())
+            {
+                using (CryptoStream cryptoStream = new CryptoStream(PrzechowywanieStrumieniaBajtow, NarzędzieSzyfrujące, CryptoStreamMode.Write))
                 {
                     cryptoStream.Write(data, 0, data.Length);
                 }
 
-                encryptedData = memoryStream.ToArray();
+                ZaszyfrowaneDanePliku = PrzechowywanieStrumieniaBajtow.ToArray();
             }
 
-            byte[] combinedData = new byte[key.Length + iv.Length + encryptedData.Length];
+            byte[] DaneDoRozszyfrowania = new byte[KluczSzyfrujacy.Length + KluczaWartoscIV.Length + ZaszyfrowaneDanePliku.Length];
 
-            Buffer.BlockCopy(key, 0, combinedData, 0, key.Length);
-            Buffer.BlockCopy(iv, 0, combinedData, key.Length, iv.Length);
-            Buffer.BlockCopy(encryptedData, 0, combinedData, key.Length + iv.Length, encryptedData.Length);
+            Buffer.BlockCopy(KluczSzyfrujacy, 0, DaneDoRozszyfrowania, 0, KluczSzyfrujacy.Length);
+            Buffer.BlockCopy(KluczaWartoscIV, 0, DaneDoRozszyfrowania, KluczSzyfrujacy.Length, KluczaWartoscIV.Length);
+            Buffer.BlockCopy(ZaszyfrowaneDanePliku, 0, DaneDoRozszyfrowania, KluczSzyfrujacy.Length + KluczaWartoscIV.Length, ZaszyfrowaneDanePliku.Length);
 
-            return combinedData;
+            return DaneDoRozszyfrowania;
         }
-        static byte[] DecryptData(SymmetricAlgorithm algorithm, byte[] combinedData)
+        static byte[] DecryptData(SymmetricAlgorithm Algorytm, byte[] DaneDoRozszyfrowania)
         {
-            byte[] key = new byte[algorithm.KeySize / 8];
-            byte[] iv = new byte[algorithm.BlockSize / 8];
-            byte[] encryptedData = new byte[combinedData.Length - key.Length - iv.Length];
+            byte[] KluczSzyfrujacy = new byte[Algorytm.KeySize / 8];
+            byte[] KluczaWartoscIV = new byte[Algorytm.BlockSize / 8];
+            byte[] ZaszyfrowaneDanePliku = new byte[DaneDoRozszyfrowania.Length - KluczSzyfrujacy.Length - KluczaWartoscIV.Length];
 
-            Buffer.BlockCopy(combinedData, 0, key, 0, key.Length);
-            Buffer.BlockCopy(combinedData, key.Length, iv, 0, iv.Length);
-            Buffer.BlockCopy(combinedData, key.Length + iv.Length, encryptedData, 0, encryptedData.Length);
+            Buffer.BlockCopy(DaneDoRozszyfrowania, 0, KluczSzyfrujacy, 0, KluczSzyfrujacy.Length);
+            Buffer.BlockCopy(DaneDoRozszyfrowania, KluczSzyfrujacy.Length, KluczaWartoscIV, 0, KluczaWartoscIV.Length);
+            Buffer.BlockCopy(DaneDoRozszyfrowania, KluczSzyfrujacy.Length + KluczaWartoscIV.Length, ZaszyfrowaneDanePliku, 0, ZaszyfrowaneDanePliku.Length);
 
-            ICryptoTransform decryptor = algorithm.CreateDecryptor(key, iv);
+            ICryptoTransform NarzedzieDeszyfrujace = Algorytm.CreateDecryptor(KluczSzyfrujacy, KluczaWartoscIV);
 
-            byte[] decryptedData;
+            byte[] OdszyfrowaneDanePliku;
 
-            using (MemoryStream memoryStream = new MemoryStream(encryptedData))
+            using (MemoryStream PrzechowywanieStrumieniaBajtow = new MemoryStream(ZaszyfrowaneDanePliku))
             {
-                using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                using (CryptoStream TransformacjeKryptograficzne = new CryptoStream(PrzechowywanieStrumieniaBajtow, NarzedzieDeszyfrujace, CryptoStreamMode.Read))
                 {
-                    decryptedData = new byte[encryptedData.Length];
-                    int bytesRead = cryptoStream.Read(decryptedData, 0, decryptedData.Length);
-                    Array.Resize(ref decryptedData, bytesRead);
+                    OdszyfrowaneDanePliku = new byte[ZaszyfrowaneDanePliku.Length];
+                    int DoOdczytuBajtyPliku = TransformacjeKryptograficzne.Read(OdszyfrowaneDanePliku, 0, OdszyfrowaneDanePliku.Length);
+                    Array.Resize(ref OdszyfrowaneDanePliku, DoOdczytuBajtyPliku);
                 }
             }
 
-            return decryptedData;
+            return OdszyfrowaneDanePliku;
         }
     }
 }
