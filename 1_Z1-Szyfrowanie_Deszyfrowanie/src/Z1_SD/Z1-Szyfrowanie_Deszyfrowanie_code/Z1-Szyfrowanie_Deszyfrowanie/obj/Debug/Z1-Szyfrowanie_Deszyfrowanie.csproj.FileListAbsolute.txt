@@ -1,0 +1,8 @@
+C:\Users\luqasz\source\repos\Z1-Szyfrowanie_Deszyfrowanie\Z1-Szyfrowanie_Deszyfrowanie\bin\Debug\Z1-Szyfrowanie_Deszyfrowanie.exe.config
+C:\Users\luqasz\source\repos\Z1-Szyfrowanie_Deszyfrowanie\Z1-Szyfrowanie_Deszyfrowanie\bin\Debug\Z1-Szyfrowanie_Deszyfrowanie.exe
+C:\Users\luqasz\source\repos\Z1-Szyfrowanie_Deszyfrowanie\Z1-Szyfrowanie_Deszyfrowanie\bin\Debug\Z1-Szyfrowanie_Deszyfrowanie.pdb
+C:\Users\luqasz\source\repos\Z1-Szyfrowanie_Deszyfrowanie\Z1-Szyfrowanie_Deszyfrowanie\obj\Debug\Z1-Szyfrowanie_Deszyfrowanie.csproj.AssemblyReference.cache
+C:\Users\luqasz\source\repos\Z1-Szyfrowanie_Deszyfrowanie\Z1-Szyfrowanie_Deszyfrowanie\obj\Debug\Z1-Szyfrowanie_Deszyfrowanie.csproj.SuggestedBindingRedirects.cache
+C:\Users\luqasz\source\repos\Z1-Szyfrowanie_Deszyfrowanie\Z1-Szyfrowanie_Deszyfrowanie\obj\Debug\Z1-Szyfrowanie_Deszyfrowanie.csproj.CoreCompileInputs.cache
+C:\Users\luqasz\source\repos\Z1-Szyfrowanie_Deszyfrowanie\Z1-Szyfrowanie_Deszyfrowanie\obj\Debug\Z1-Szyfrowanie_Deszyfrowanie.exe
+C:\Users\luqasz\source\repos\Z1-Szyfrowanie_Deszyfrowanie\Z1-Szyfrowanie_Deszyfrowanie\obj\Debug\Z1-Szyfrowanie_Deszyfrowanie.pdb
