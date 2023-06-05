@@ -13,6 +13,13 @@ namespace EncryptionConsoleApp
     {
         static void Main(string[] args)
         {
+
+            Console.WriteLine("Enter file path: ");
+            string filePath = Console.ReadLine();
+
+            Console.WriteLine("Enter output file path: ");
+            string outputPath = Console.ReadLine();
+
             Console.WriteLine("Choose encryption algorithm (1 for AES, 2 for DES): ");
             int algorithmChoice = Convert.ToInt32(Console.ReadLine());
 
@@ -32,26 +39,42 @@ namespace EncryptionConsoleApp
 
             Console.WriteLine($"Selected {algorithmName} encryption algorithm");
 
-            Console.WriteLine("Enter file path: ");
-            string filePath = Console.ReadLine();
 
-            Console.WriteLine("Enter output file path: ");
-            string outputPath = Console.ReadLine();
+            Console.WriteLine("Szyfrować czy deszyfrować:");
+            string choice = Console.ReadLine();
 
-            Console.WriteLine("Enter key: ");
-            byte[] key = Convert.FromBase64String(Console.ReadLine());
+            if (choice == "A")
+            {
+                if (File.Exists(filePath))
+                {
+                    byte[] fileData = File.ReadAllBytes(filePath);
+                    byte[] encryptedData = EncryptData(algorithm, fileData);
 
-            Console.WriteLine("Enter IV: ");
-            byte[] iv = Convert.FromBase64String(Console.ReadLine());
+                    File.WriteAllBytes(outputPath, encryptedData);
 
-            byte[] fileData = File.ReadAllBytes(filePath);
-            byte[] decryptedData = DecryptData(algorithm, fileData, key, iv);
+                    Console.WriteLine("Encryption completed.");
+                }
 
-            File.WriteAllBytes(outputPath, decryptedData);
+            }
+            else if (choice == "D")
+            {
+                if (File.Exists(filePath))
+                {
+                    byte[] combinedData = File.ReadAllBytes(filePath);
+                    byte[] decryptedData = DecryptData(algorithm, combinedData);
 
-            Console.WriteLine("Decryption completed.");
+                    File.WriteAllBytes(outputPath, decryptedData);
+
+                    Console.WriteLine("Decryption completed.");
+                }
+            }
+            else
+            {
+                    Console.WriteLine("File not found.");
+            }            
+
+            Console.ReadLine();
         }
-
         static byte[] EncryptData(SymmetricAlgorithm algorithm, byte[] data)
         {
             algorithm.GenerateKey();
@@ -82,12 +105,15 @@ namespace EncryptionConsoleApp
 
             return combinedData;
         }
-
-        static byte[] DecryptData(SymmetricAlgorithm algorithm, byte[] data, byte[] key, byte[] iv)
+        static byte[] DecryptData(SymmetricAlgorithm algorithm, byte[] combinedData)
         {
-            byte[] encryptedData = new byte[data.Length - key.Length - iv.Length];
+            byte[] key = new byte[algorithm.KeySize / 8];
+            byte[] iv = new byte[algorithm.BlockSize / 8];
+            byte[] encryptedData = new byte[combinedData.Length - key.Length - iv.Length];
 
-            Buffer.BlockCopy(data, key.Length + iv.Length, encryptedData, 0, encryptedData.Length);
+            Buffer.BlockCopy(combinedData, 0, key, 0, key.Length);
+            Buffer.BlockCopy(combinedData, key.Length, iv, 0, iv.Length);
+            Buffer.BlockCopy(combinedData, key.Length + iv.Length, encryptedData, 0, encryptedData.Length);
 
             ICryptoTransform decryptor = algorithm.CreateDecryptor(key, iv);
 
@@ -97,10 +123,9 @@ namespace EncryptionConsoleApp
             {
                 using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
                 {
-                    using (StreamReader streamReader = new StreamReader(cryptoStream))
-                    {
-                        decryptedData = Encoding.ASCII.GetBytes(streamReader.ReadToEnd());
-                    }
+                    decryptedData = new byte[encryptedData.Length];
+                    int bytesRead = cryptoStream.Read(decryptedData, 0, decryptedData.Length);
+                    Array.Resize(ref decryptedData, bytesRead);
                 }
             }
 
