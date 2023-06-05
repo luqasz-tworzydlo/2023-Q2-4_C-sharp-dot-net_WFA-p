@@ -38,12 +38,18 @@ namespace EncryptionConsoleApp
             Console.WriteLine("Enter output file path: ");
             string outputPath = Console.ReadLine();
 
+            Console.WriteLine("Enter key: ");
+            byte[] key = Convert.FromBase64String(Console.ReadLine());
+
+            Console.WriteLine("Enter IV: ");
+            byte[] iv = Convert.FromBase64String(Console.ReadLine());
+
             byte[] fileData = File.ReadAllBytes(filePath);
-            byte[] encryptedData = EncryptData(algorithm, fileData);
+            byte[] decryptedData = DecryptData(algorithm, fileData, key, iv);
 
-            File.WriteAllBytes(outputPath, encryptedData);
+            File.WriteAllBytes(outputPath, decryptedData);
 
-            Console.WriteLine("Encryption completed.");
+            Console.WriteLine("Decryption completed.");
         }
 
         static byte[] EncryptData(SymmetricAlgorithm algorithm, byte[] data)
@@ -75,6 +81,30 @@ namespace EncryptionConsoleApp
             Buffer.BlockCopy(encryptedData, 0, combinedData, key.Length + iv.Length, encryptedData.Length);
 
             return combinedData;
+        }
+
+        static byte[] DecryptData(SymmetricAlgorithm algorithm, byte[] data, byte[] key, byte[] iv)
+        {
+            byte[] encryptedData = new byte[data.Length - key.Length - iv.Length];
+
+            Buffer.BlockCopy(data, key.Length + iv.Length, encryptedData, 0, encryptedData.Length);
+
+            ICryptoTransform decryptor = algorithm.CreateDecryptor(key, iv);
+
+            byte[] decryptedData;
+
+            using (MemoryStream memoryStream = new MemoryStream(encryptedData))
+            {
+                using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                {
+                    using (StreamReader streamReader = new StreamReader(cryptoStream))
+                    {
+                        decryptedData = Encoding.ASCII.GetBytes(streamReader.ReadToEnd());
+                    }
+                }
+            }
+
+            return decryptedData;
         }
     }
 }
