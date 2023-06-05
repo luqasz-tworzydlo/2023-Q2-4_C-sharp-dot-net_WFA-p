@@ -14,67 +14,6 @@ namespace EncryptionConsoleApp
         static void Main(string[] args)
         {
             InstrukcjaDzialaniaProgramu();
-
-
-            Console.WriteLine("Enter file path: ");
-            string filePath = Console.ReadLine();
-
-            Console.WriteLine("Enter output file path: ");
-            string outputPath = Console.ReadLine();
-
-            Console.WriteLine("Choose encryption algorithm (1 for AES, 2 for DES): ");
-            int algorithmChoice = Convert.ToInt32(Console.ReadLine());
-
-            string algorithmName;
-            SymmetricAlgorithm algorithm;
-
-            if (algorithmChoice == 1)
-            {
-                algorithmName = "AES";
-                algorithm = new AesManaged();
-            }
-            else
-            {
-                algorithmName = "DES";
-                algorithm = new DESCryptoServiceProvider();
-            }
-
-            Console.WriteLine($"Selected {algorithmName} encryption algorithm");
-
-
-            Console.WriteLine("Szyfrować czy deszyfrować:");
-            string choice = Console.ReadLine();
-
-            if (choice == "A")
-            {
-                if (File.Exists(filePath))
-                {
-                    byte[] fileData = File.ReadAllBytes(filePath);
-                    byte[] encryptedData = EncryptData(algorithm, fileData);
-
-                    File.WriteAllBytes(outputPath, encryptedData);
-
-                    Console.WriteLine("Encryption completed.");
-                }
-
-            }
-            else if (choice == "D")
-            {
-                if (File.Exists(filePath))
-                {
-                    byte[] combinedData = File.ReadAllBytes(filePath);
-                    byte[] decryptedData = DecryptData(algorithm, combinedData);
-
-                    File.WriteAllBytes(outputPath, decryptedData);
-
-                    Console.WriteLine("Decryption completed.");
-                }
-            }
-            else
-            {
-                    Console.WriteLine("File not found.");
-            }            
-
             Console.ReadLine();
         }
         public static void InstrukcjaDzialaniaProgramu()
@@ -100,7 +39,7 @@ namespace EncryptionConsoleApp
 
             Console.WriteLine("\n////////// ////////// ////////// ////////// //////////\n");
 
-            Console.WriteLine("Wciśnij cokolwiek, aby kontynuować...\n");
+            Console.WriteLine("Wciśnij cokolwiek, aby kontynuować...");
             string IDP;
             IDP = Convert.ToString(Console.ReadLine());
             switch (IDP)
@@ -109,8 +48,116 @@ namespace EncryptionConsoleApp
                     SzyfrowanieDeszyfrowanieTekstuPliku(); break;
             }
         }
-        public static void SzyfrowanieDeszyfrowanieTekstuPliku()
+        public static (string, string) SzyfrowanieDeszyfrowanieTekstuPliku()
         {
+            Console.WriteLine("=> Wprowadź ścieżkę pliku do wczytania ( przykładowo: C:/Users/luqasz/Desktop/tekst.txt ):");
+            string SciezkaPlikuDoWczytania = Console.ReadLine();
+
+            Console.WriteLine("\n=> Wprowadź ścieżkę pliku do zapisania ( przykładowo: C:/Users/luqasz/Desktop/wynik.txt ):");
+            string SciezkaPlikuDoZapisania = Console.ReadLine();
+
+            Console.WriteLine("\nWciśnij cokolwiek, aby przejść do wybrania algorytmu szyfrującego...");
+            string IDP;
+            IDP = Convert.ToString(Console.ReadLine());
+            switch (IDP)
+            {
+                default:
+                    WyborAlgorytmuAESlubDES(); break;
+            }
+
+            return (SciezkaPlikuDoWczytania, SciezkaPlikuDoZapisania);
+        }
+        public static SymmetricAlgorithm WyborAlgorytmuAESlubDES()
+        {
+            Console.WriteLine("=> Wybierz algorytm szyfrujący AES bądź DES:" +
+                "\n(1) AES (aby wybrać algorytm AES wpisz AES lub nieparzystą liczbę jednocyfrową, czyli: AES, 1, 3, 5, 7 lub 9)" +
+                "\n(2) DES (aby wybrać algorytm DES wpisz DES lub parzystą liczbę jednocyfrową, czyli: DES, 2, 4, 6 bądź 8)");
+            string WybórAlgorytmu = Convert.ToString(Console.ReadLine());
+
+            string NazwaAlgorytmu;
+            SymmetricAlgorithm Algorytm;
+
+            if (WybórAlgorytmu == "AES" || WybórAlgorytmu == "1" || WybórAlgorytmu == "3" || WybórAlgorytmu == "5" || WybórAlgorytmu == "7" || WybórAlgorytmu == "9")
+            {
+                NazwaAlgorytmu = "AES";
+                Algorytm = new AesManaged();
+
+            }
+            else if (WybórAlgorytmu == "DES" || WybórAlgorytmu == "2" || WybórAlgorytmu == "4" || WybórAlgorytmu == "6" || WybórAlgorytmu == "8")
+            {
+                NazwaAlgorytmu = "DES";
+                Algorytm = new DESCryptoServiceProvider();
+            }
+            else
+            {
+                BladPrzyWyborzeAlgorytmu();
+                return null;
+            }
+
+            Console.WriteLine($"\nWybrano następujący algorytm szyfrujący: {NazwaAlgorytmu}");
+            return Algorytm;
+
+        }
+        public static void BladPrzyWyborzeAlgorytmu()
+        {
+            Console.WriteLine("\nNie został wybrany żaden algorytm... należy powtórzyć działanie.\n");
+
+            Console.WriteLine("Wciśnij cokolwiek w celu ponownego wybrania algorytmu...");
+            string IDP;
+            IDP = Convert.ToString(Console.ReadLine());
+            switch (IDP)
+            {
+                default:
+                    WyborAlgorytmuAESlubDES(); break;
+            }
+        }
+        public static void CzySzyfrowacCzyDeszyfrowac()
+        {
+            SymmetricAlgorithm Algorytm = WyborAlgorytmuAESlubDES();
+            (string SciezkaPlikuDoWczytania, string SciezkaPlikuDoZapisania) = SzyfrowanieDeszyfrowanieTekstuPliku();
+
+            Console.WriteLine("=> Będziemy szyfrować czy deszyfrować następujący plik?" +
+                "\n(1) Aby wykonać szyfrowanie wpisz '1' lub 'szyfr'" +
+                "\n(2) Aby wykonać szyfrowanie wpisz '2' lub 'deszyfr'");
+            string WyborSzyfrowaniaLubDeszyfrowania = Console.ReadLine();
+
+            if (WyborSzyfrowaniaLubDeszyfrowania == "1" || WyborSzyfrowaniaLubDeszyfrowania == "szyfr")
+            {
+                if (File.Exists(SciezkaPlikuDoWczytania))
+                {
+                    byte[] DanePlikuDoZaszyfrowania = File.ReadAllBytes(SciezkaPlikuDoWczytania);
+                    byte[] ZaszyfrowaneDanePliku = EncryptData(Algorytm, DanePlikuDoZaszyfrowania);
+
+                    File.WriteAllBytes(SciezkaPlikuDoZapisania, ZaszyfrowaneDanePliku);
+
+                    Console.WriteLine("Szyfrowanie zakończone sukcesem!");
+                }
+                else
+                {
+                    Console.WriteLine("\nBrak wczytanego pliku...");
+                }
+
+            }
+            else if (WyborSzyfrowaniaLubDeszyfrowania == "2" || WyborSzyfrowaniaLubDeszyfrowania == "deszyfr")
+            {
+                if (File.Exists(SciezkaPlikuDoWczytania))
+                {
+                    byte[] DaneDoRozszyfrowania = File.ReadAllBytes(SciezkaPlikuDoWczytania);
+                    byte[] OdszyfrowaneDanePliku = DecryptData(Algorytm, DaneDoRozszyfrowania);
+
+                    File.WriteAllBytes(SciezkaPlikuDoZapisania, OdszyfrowaneDanePliku);
+
+                    Console.WriteLine("Deszyfrowanie zakończone sukcesem!");
+                }
+                else
+                {
+                    Console.WriteLine("\nBrak wczytanego pliku...");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Brak pliku bądź nie wybrano odpowiedniej opcji...");
+            }
 
         }
         static byte[] EncryptData(SymmetricAlgorithm algorithm, byte[] data)
