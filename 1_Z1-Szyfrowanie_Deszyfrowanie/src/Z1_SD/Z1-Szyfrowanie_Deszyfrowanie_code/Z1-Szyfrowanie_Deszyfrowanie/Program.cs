@@ -13,6 +13,8 @@ namespace EncryptionConsoleApp
     {
         static void Main(string[] args)
         {
+            InstrukcjaDzialaniaProgramu();
+
 
             Console.WriteLine("Enter file path: ");
             string filePath = Console.ReadLine();
@@ -74,6 +76,42 @@ namespace EncryptionConsoleApp
             }            
 
             Console.ReadLine();
+        }
+        public static void InstrukcjaDzialaniaProgramu()
+        {
+            Console.WriteLine("\n////////// ////////// ////////// ////////// //////////\n");
+
+            Console.WriteLine("Niniejszy program służy do szyfrowania oraz deszyfrowania tekstu plików, czyli" +
+                "\n(0) przygotowanie pliku, na którym będziemy działać [np. do zaszyfrowania]" +
+                "\n(1) wczytanie pliku .txt, który zawiera tekst do zaszyfrowania lub odszyfrowania" +
+                "\n(1a) aby wczytać plik .txt należy podać dokładną ścieżkę do tego pliku" +
+                "\n(1b) przykładowa ścieżka to: C:/Users/luqasz/Desktop/tekst.txt" +
+                "\n(2) następnym krokiem jest podanie miejsca, gdzie ma być zapisany plik" +
+                "\n(2a) może to być ta sama lokalizacja i ten sam plik, lecz wtedy będzie plik nadpisany" +
+                "\n(2b) jeśli chcemy zapisać do innego pliku to też można, lecz także będzie on nadpisany" +
+                "\n(2c) jeśli chcemy zapisać wynik działania to wtedy można stworzyć nowy plik w nowym miejscu" +
+                "\n(2d) przykładowo, stworzenie nowego pliku w danym miejscu to: C:/Users/luqasz/Desktop/wynik.txt" +
+                "\n(3) wybranie algorytmu szyfrującego/deszyfrującego, czyli algorytm AES bądź algorytm DES" +
+                "\n(3a) algorytm AES jest bardziej bezpieczny i trudniejszy do złamania" +
+                "\n(3b) algorytm DES jest którszy i też trochę prostszy do złamania" +
+                "\n(4) po wybraniu algorytmu trzeba wybrać, czy chcemy szyfrować, czy deszyfrować tekst w pliku" +
+                "\n(4a) po wybraniu szyfrowania będzie stworzony zaszyfrowany tekst w nowym lub istniejącym pliku" +
+                "\n(4b) po wybraniu deszyfrowania będzie stworzony odszyfrowany tekst w nowym lub istniejącym pliku");
+
+            Console.WriteLine("\n////////// ////////// ////////// ////////// //////////\n");
+
+            Console.WriteLine("Wciśnij cokolwiek, aby kontynuować...\n");
+            string IDP;
+            IDP = Convert.ToString(Console.ReadLine());
+            switch (IDP)
+            {
+                default:
+                    SzyfrowanieDeszyfrowanieTekstuPliku(); break;
+            }
+        }
+        public static void SzyfrowanieDeszyfrowanieTekstuPliku()
+        {
+
         }
         static byte[] EncryptData(SymmetricAlgorithm algorithm, byte[] data)
         {
