@@ -4,39 +4,52 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// w celu działania niniejszego programu należy
+// zainstalować dodatkowy pakiet Newtonsoft.Json
 using Newtonsoft.Json;
 
 namespace Z2_Serializacja_Deserializacja
 {
-    public class Person
+    public class Osoba
     {
-        public string Name { get; set; }
-        public int Age { get; set; }
+        public string Imie { get; set; }
+        public string Nazwisko { get; set; }
+        public string PlecOsoby { get; set; }
+        public string Pochodzenie { get; set; }
+        public int WiekOsoby { get; set; }
     }
 
     class Program
     {
         static void Main(string[] args)
         {
-            // Create a new Person object and set its properties
-            Person person = new Person
+            // w pierwszej kolejności tworzymy nową osobę
+            // oraz przypisujemy jej konkretne wartości,
+            // czyli imię, nazwisko, wiek, płeć
+            Osoba Osoba = new Osoba
             {
-                Name = "John Smith",
-                Age = 30
+                Imie = "Signy",
+                Nazwisko = "Svfnir",
+                PlecOsoby = "kobieta",
+                Pochodzenie = "Skandynawia",
+                WiekOsoby = 27
             };
 
-            // Serialize the Person object to JSON
-            string json = JsonConvert.SerializeObject(person);
+            // serializacja obiektu Osoba na JSON
+            string JSON = JsonConvert.SerializeObject(Osoba);
 
-            Console.WriteLine("Serialized JSON:");
-            Console.WriteLine(json);
+            Console.WriteLine("Serializowany string JSON:");
+            Console.WriteLine(JSON);
 
-            // Deserialize the JSON string to a new Person object
-            Person deserializedPerson = JsonConvert.DeserializeObject<Person>(json);
+            // deserializacja stringu JSON na nowy obiekt Osoba
+            Osoba ZdeserializowanaOsoba = JsonConvert.DeserializeObject<Osoba>(JSON);
 
             Console.WriteLine("Deserialized Person:");
-            Console.WriteLine("Name: " + deserializedPerson.Name);
-            Console.WriteLine("Age: " + deserializedPerson.Age);
+            Console.WriteLine("Name: " + ZdeserializowanaOsoba.Imie);
+            Console.WriteLine("Name: " + ZdeserializowanaOsoba.Nazwisko);
+            Console.WriteLine("Name: " + ZdeserializowanaOsoba.PlecOsoby);
+            Console.WriteLine("Name: " + ZdeserializowanaOsoba.Pochodzenie);
+            Console.WriteLine("Age: " + ZdeserializowanaOsoba.WiekOsoby);
 
             Console.ReadLine();
         }
