@@ -7,6 +7,19 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Security.Cryptography;
 
+//////////////////////////////////////////////////
+//
+// => Imię i nazwisko: Łukasz Tworzydło
+// => Numer albumu: gd29623
+// => Nr. kierunku: INIS4_PR2.2
+// => Przedmiot: Programowanie .NET
+//
+//////////////////////////////////////////////////
+//
+// Łukasz Tworzydło - nr albumu: gd29623 [projekt nr 1]
+//
+//////////////////////////////////////////////////
+
 namespace EncryptionConsoleApp
 {
     class Program
