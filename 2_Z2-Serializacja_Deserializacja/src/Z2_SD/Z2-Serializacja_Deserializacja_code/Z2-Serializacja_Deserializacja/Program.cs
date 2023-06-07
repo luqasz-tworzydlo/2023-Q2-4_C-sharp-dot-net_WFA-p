@@ -8,6 +8,19 @@ using System.Threading.Tasks;
 // zainstalować dodatkowy pakiet Newtonsoft.Json
 using Newtonsoft.Json;
 
+//////////////////////////////////////////////////
+//
+// => Imię i nazwisko: Łukasz Tworzydło
+// => Numer albumu: gd29623
+// => Nr. kierunku: INIS4_PR2.2
+// => Przedmiot: Programowanie .NET
+//
+//////////////////////////////////////////////////
+//
+// Łukasz Tworzydło - nr albumu: gd29623 [projekt nr 2]
+//
+//////////////////////////////////////////////////
+
 namespace Z2_Serializacja_Deserializacja
 {
     public class Osoba
@@ -19,7 +32,7 @@ namespace Z2_Serializacja_Deserializacja
         public int WiekOsoby { get; set; }
     }
 
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
@@ -44,12 +57,12 @@ namespace Z2_Serializacja_Deserializacja
             // deserializacja stringu JSON na nowy obiekt Osoba
             Osoba ZdeserializowanaOsoba = JsonConvert.DeserializeObject<Osoba>(JSON);
 
-            Console.WriteLine("Deserialized Person:");
-            Console.WriteLine("Name: " + ZdeserializowanaOsoba.Imie);
-            Console.WriteLine("Name: " + ZdeserializowanaOsoba.Nazwisko);
-            Console.WriteLine("Name: " + ZdeserializowanaOsoba.PlecOsoby);
-            Console.WriteLine("Name: " + ZdeserializowanaOsoba.Pochodzenie);
-            Console.WriteLine("Age: " + ZdeserializowanaOsoba.WiekOsoby);
+            Console.WriteLine("Zdeserializowany obiekt Osoba");
+            Console.WriteLine("Imię: " + ZdeserializowanaOsoba.Imie);
+            Console.WriteLine("Nazwisko: " + ZdeserializowanaOsoba.Nazwisko);
+            Console.WriteLine("Płeć osoby: " + ZdeserializowanaOsoba.PlecOsoby);
+            Console.WriteLine("Pochodzenie: " + ZdeserializowanaOsoba.Pochodzenie);
+            Console.WriteLine("Wiek osoby: " + ZdeserializowanaOsoba.WiekOsoby);
 
             Console.ReadLine();
         }
