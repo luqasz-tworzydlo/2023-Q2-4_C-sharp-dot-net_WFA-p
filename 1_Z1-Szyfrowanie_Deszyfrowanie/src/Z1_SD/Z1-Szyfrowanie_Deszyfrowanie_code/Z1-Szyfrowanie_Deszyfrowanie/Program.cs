@@ -170,7 +170,7 @@ namespace Z1_Szyfrowanie_Deszyfrowanie
             }
         }
 
-        static byte[] EncryptData(SymmetricAlgorithm Algorytm, byte[] data)
+        static byte[] EncryptData(SymmetricAlgorithm Algorytm, byte[] DaneDoZaszyfrowania)
         {
             Algorytm.GenerateKey();
             Algorytm.GenerateIV();
@@ -184,9 +184,9 @@ namespace Z1_Szyfrowanie_Deszyfrowanie
 
             using (MemoryStream PrzechowywanieStrumieniaBajtow = new MemoryStream())
             {
-                using (CryptoStream cryptoStream = new CryptoStream(PrzechowywanieStrumieniaBajtow, NarzędzieSzyfrujące, CryptoStreamMode.Write))
+                using (CryptoStream TransformacjeKryptograficzne = new CryptoStream(PrzechowywanieStrumieniaBajtow, NarzędzieSzyfrujące, CryptoStreamMode.Write))
                 {
-                    cryptoStream.Write(data, 0, data.Length);
+                    TransformacjeKryptograficzne.Write(DaneDoZaszyfrowania, 0, DaneDoZaszyfrowania.Length);
                 }
 
                 ZaszyfrowaneDanePliku = PrzechowywanieStrumieniaBajtow.ToArray();
