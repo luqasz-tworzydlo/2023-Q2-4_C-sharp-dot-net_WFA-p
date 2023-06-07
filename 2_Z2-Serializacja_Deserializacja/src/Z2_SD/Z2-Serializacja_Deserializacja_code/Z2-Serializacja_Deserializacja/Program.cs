@@ -72,6 +72,10 @@ namespace Z2_Serializacja_Deserializacja
             Console.WriteLine("(4) Pochodzenie: " + ZdeserializowanaOsoba.Pochodzenie);
             Console.WriteLine("(5) Wiek osoby: " + ZdeserializowanaOsoba.WiekOsoby);
 
+            KontynuacjaProgramu();
+
+            DefinicjeSerializacjaDeserializacja();
+
             Console.ReadLine();
         }
 
@@ -104,6 +108,47 @@ namespace Z2_Serializacja_Deserializacja
                 default:
                     break;
             }
+        }
+        public static void DefinicjeSerializacjaDeserializacja()
+        {
+            Console.WriteLine("////////// ////////// ////////// ////////// //////////\n");
+
+            Console.WriteLine("Po przejściu przez pierwszy punkt, a więc przedstawienie" +
+                "\nw prosty sposób działania serializacji oraz deserializacji" +
+                "\nteraz zostanie w krótki sposób przedstawiona definicja" +
+                "\nserializacji oraz deserializacja, a więc co to jest");
+
+            Console.WriteLine("\n////////// ////////// ////////// ////////// //////////\n");
+
+            Console.WriteLine("Wciśnij cokolwiek, aby kontynuować...");
+            string IDP;
+            IDP = Convert.ToString(Console.ReadLine());
+            switch (IDP)
+            {
+                default:
+                    PrzedstawienieDefinicjiSD(); break;
+            }
+        }
+        public static void PrzedstawienieDefinicjiSD()
+        {
+            Console.WriteLine("Serializacja to proces konwertowania obiektu na strumień bajtów w celu" +
+                "\nprzechowywania obiektu lub przesyłania go do pamięci, bazy danych lub pliku." +
+                "\nJego głównym celem jest zapisanie stanu obiektu w celu ponownego utworzenia" +
+                "\ngo w razie potrzeby. Proces odwrotny jest nazywany deserializacją.");
+
+            KontynuacjaProgramu();
+
+            Console.WriteLine("Działanie serializacji i deserializacja wygląda następująco:" +
+                "\n=> obiekt jest serializowany do strumienia, który przenosi dane;" +
+                "\n=> strumień może również zawierać informacje o typie obiektu," +
+                "\n   takie jak jego wersja, kultura i nazwa zestawu." +
+                "\n=> z tego strumienia obiekt może być przechowywany" +
+                "\n   w bazie danych, pliku lub pamięci");
+
+            KontynuacjaProgramu();
+
+            Console.WriteLine("Źródło użytych definicji w metodzie PrzedstawienieDefinicjiSD() to:" +
+                "\n=> https://learn.microsoft.com/pl-pl/dotnet/csharp/programming-guide/concepts/serialization/");
         }
     }
     public class Osoba
