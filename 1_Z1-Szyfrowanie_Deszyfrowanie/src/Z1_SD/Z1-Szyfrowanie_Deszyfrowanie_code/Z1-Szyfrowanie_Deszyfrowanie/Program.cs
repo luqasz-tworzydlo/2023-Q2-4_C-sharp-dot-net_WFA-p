@@ -20,7 +20,7 @@ using System.Security.Cryptography;
 //
 //////////////////////////////////////////////////
 
-namespace EncryptionConsoleApp
+namespace Z1_Szyfrowanie_Deszyfrowanie
 {
     class Program
     {
