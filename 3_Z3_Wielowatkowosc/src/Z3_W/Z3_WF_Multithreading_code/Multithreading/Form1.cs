@@ -10,9 +10,9 @@ namespace Multithreading
             InitializeComponent();
         }
 
-        Color myRed = Color.FromArgb(217, 83, 79);
-        Color myBlue = Color.FromArgb(138, 202, 222);
-        Color myGreen = Color.FromArgb(140, 172, 106);
+        //Color myRed = Color.FromArgb(217, 83, 79);
+        //Color myBlue = Color.FromArgb(138, 202, 222);
+        //Color myGreen = Color.FromArgb(140, 172, 106);
 
         Thread thread1;
         Thread thread2;
@@ -22,7 +22,7 @@ namespace Multithreading
 
         private void buttonThread1_Click(object sender, EventArgs e)
         {
-            Thread watek1 = new Thread(() =>
+            Thread thread1 = new Thread(() =>
             {
                 double wynik_obliczen = 0;
                 for (int i = 0; i < 100000000; i++)
@@ -34,12 +34,12 @@ namespace Multithreading
                     label4.Text = $"Wynik obliczen z 100'000'000 iteracji\npetli wynosi = {wynik_obliczen}";
                 }));
             });
-            watek1.Start();
+            thread1.Start();
         }
 
         private void buttonThread2_Click(object sender, EventArgs e)
         {
-            Thread watek2 = new Thread(() =>
+            Thread thread2 = new Thread(() =>
             {
                 BigInteger wynik_silnia = 1;
                 for (int i = 2; i <=25; i++)
@@ -51,12 +51,12 @@ namespace Multithreading
                     label5.Text = $"Wynik obliczen silnii z 25 wynosi\n= {wynik_silnia}";
                 }));
             });
-            watek2.Start();
+            thread2.Start();
         }
 
         private void buttonThread3_Click(object sender, EventArgs e)
         {
-            Thread watek3 = new Thread(() =>
+            Thread thread3 = new Thread(() =>
             {
                 /*int suma_liczb_parzystych = 0;
                 for (int i = 0; i < 1000000; i++)
@@ -87,22 +87,40 @@ namespace Multithreading
                     label6.Text = $"Wynik obliczen sumy liczb parzystych\nod 0 do 1'000'000 wynosi= {suma_liczb_parzystych}";
                 }));
             });
-            watek3.Start();
+            thread3.Start();
         }
 
         private void buttonEnd_Click(object sender, EventArgs e)
         {
             try
             {
-                thread1.Interrupt();
-                thread2.Interrupt();
-                thread3.Interrupt();
+                if (thread1 != null)
+                {
+                    thread1.Interrupt();
+                }
+                if (thread2 != null)
+                {
+                    thread2.Interrupt();
+                }
+                if (thread3 != null)
+                {
+                    thread3.Interrupt();
+                }
             }
             catch (ThreadInterruptedException d)
             {
-                thread1.Interrupt();
-                thread2.Interrupt();
-                thread3.Interrupt();
+                if (thread1 != null)
+                {
+                    thread1.Interrupt();
+                }
+                if (thread2 != null)
+                {
+                    thread2.Interrupt();
+                }
+                if (thread3 != null)
+                {
+                    thread3.Interrupt();
+                }
             }
         }
 
@@ -132,16 +150,5 @@ namespace Multithreading
                 thread3.Interrupt();
             }
         }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-        }
-        private void label5_Click(object sender, EventArgs e)
-        {
-        }
-        private void label6_Click(object sender, EventArgs e)
-        {
-        }
-
     }
 }

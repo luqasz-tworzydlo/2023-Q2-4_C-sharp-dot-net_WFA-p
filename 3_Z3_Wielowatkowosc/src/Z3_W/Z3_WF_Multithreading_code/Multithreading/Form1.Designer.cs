@@ -229,7 +229,6 @@
             label4.Size = new Size(413, 40);
             label4.TabIndex = 19;
             label4.Text = "=> Obliczenia wątku nr 1";
-            label4.Click += label4_Click;
             // 
             // label5
             // 
