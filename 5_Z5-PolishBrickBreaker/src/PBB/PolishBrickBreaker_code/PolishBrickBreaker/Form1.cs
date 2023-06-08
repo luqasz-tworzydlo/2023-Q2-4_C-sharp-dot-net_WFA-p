@@ -16,11 +16,15 @@ namespace PolishBrickBreaker
         List<Brick_Cegielka> bricks;
         const int NumberOfBricks_NumerCegielek = 20;
 
+        // stworzenie naszej plytki na formularzu [planszy]
+        Paddle_Plytka paddle_plytka;
+
         // konstruktor naszego formularza [planszy]
         public PolishBrickBreaker()
         {
             InitializeComponent();
             bricks = new List<Brick_Cegielka>();
+            paddle_plytka = new Paddle_Plytka(this);
         }
 
         // zaladowanie wygenerowanych obiektow [cegielek]
@@ -31,6 +35,11 @@ namespace PolishBrickBreaker
             {
                 bricks.Add(new Brick_Cegielka(this));
             }
+        }
+
+        private void Key_Down(object sender, KeyEventArgs e)
+        {
+            paddle_plytka.PaddleMove_RuchPlytki(e);
         }
     }
 }

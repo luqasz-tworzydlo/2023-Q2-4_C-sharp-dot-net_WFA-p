@@ -85,10 +85,18 @@ namespace PolishBrickBreaker
                 // w przypadku wcisniecia lewej strzalki
                 if (e.KeyCode == Keys.Left)
                     PlayerPaddles_PlytkiGracza[i].Left -= Speed_Predkosc;
-                
+
+                // przesuwanie na lewo przy wcisnieciu literki A
+                if (e.KeyCode == Keys.A)
+                    PlayerPaddles_PlytkiGracza[i].Left -= Speed_Predkosc;
+
                 // instrukcja przesuniecia plytki na prawo,
                 // w przypadku wcisniecia prawej strzalki
                 if (e.KeyCode == Keys.Right)
+                    PlayerPaddles_PlytkiGracza[i].Left += Speed_Predkosc;
+
+                // przesuwanie na prawo przy wcisnieciu literki D
+                if (e.KeyCode == Keys.D)
                     PlayerPaddles_PlytkiGracza[i].Left += Speed_Predkosc;
             }
 
