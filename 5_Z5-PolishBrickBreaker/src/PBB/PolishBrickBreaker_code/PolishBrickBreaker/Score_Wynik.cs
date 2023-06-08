@@ -6,9 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// Rodzaje klas:
+// (1) public static class Score_Wynik
+// (2) public class Brick_Cegielka
+
 namespace PolishBrickBreaker
 {
-    public static class Score_Wynik
+    public static class Score_Wynik // klasa nr 1
     {
         // metoda odnoszaca sie do calkowitego wyniku
         public static int TotalScore_CalkowityWynik
