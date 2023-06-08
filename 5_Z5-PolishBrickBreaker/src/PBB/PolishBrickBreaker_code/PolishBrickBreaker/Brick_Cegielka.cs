@@ -9,6 +9,7 @@ using System.Windows.Forms;
 // Rodzaje klas:
 // (1) public static class Score_Wynik
 // (2) public class Brick_Cegielka
+// (3) public class Paddle_Plytka
 
 namespace PolishBrickBreaker
 {
@@ -34,7 +35,7 @@ namespace PolishBrickBreaker
                 Visible = true
             };
 
-            init_inicjowanie();
+            initialize_inicjowanie();
         }
 
         // metoda odnoszaca sie do kolorowania cegielek na planszy
@@ -67,7 +68,7 @@ namespace PolishBrickBreaker
         }
 
         // metoda odnoszaca sie do generowania (inicjowania) naszych cegielek
-        private void init_inicjowanie()
+        private void initialize_inicjowanie()
         {
             GetAllBricks_PobierzWszystkieCegielki();
             SetBrickLeftTop_UstawCegielkeLewaGora();

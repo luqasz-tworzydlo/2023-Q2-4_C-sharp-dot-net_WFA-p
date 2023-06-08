@@ -9,6 +9,7 @@ using System.Windows.Forms;
 // Rodzaje klas:
 // (1) public static class Score_Wynik
 // (2) public class Brick_Cegielka
+// (3) public class Paddle_Plytka
 
 namespace PolishBrickBreaker
 {
