@@ -12,11 +12,30 @@ namespace Z3_Wielowatkowosc
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Rozpoczynamy przykład wielowątkowości...");
+
+            // Tworzenie trzech obiektów Thread i przypisanie im metod do wykonania
+            Thread t1 = new Thread(new ThreadStart(Obliczenia1));
+            Thread t2 = new Thread(new ThreadStart(Obliczenia2));
+            Thread t3 = new Thread(new ThreadStart(Obliczenia3));
+
+            // Uruchomienie trzech wątków równolegle
+            t1.Start();
+            t2.Start();
+            t3.Start();
+
+            // Oczekiwanie na zakończenie wszystkich wątków przed zakończeniem aplikacji
+            t1.Join();
+            t2.Join();
+            t3.Join();
+
+            Console.WriteLine("Przykład wielowątkowości został zakończony.");
+
             //JakieJestDzialanieProgramu();
 
-            GlownyWatek_MultiThreading();
-            DodatkoweOddzielenieA();
-            TworzenieKilkuWatkow();
+            //GlownyWatek_MultiThreading();
+            //DodatkoweOddzielenieA();
+            //TworzenieKilkuWatkow();
 
             //WprowadzenieDoDefinicjiWielowatkowosci();
 
@@ -29,6 +48,29 @@ namespace Z3_Wielowatkowosc
             Watek.Name = "GłównyWątek (testowanie działania)";
             Console.WriteLine("To jest: {0}", Watek.Name);
         }
+        // Metody wykonywane przez trzy wątki
+        static void Obliczenia1()
+        {
+            Console.WriteLine("Wątek 1: rozpoczynamy obliczenia...");
+            // Wykonanie jakichś obliczeń matematycznych lub innych akcji
+            Thread.Sleep(5000);
+            Console.WriteLine("Wątek 1: zakończono obliczenia.");
+        }
+        static void Obliczenia2()
+        {
+            Console.WriteLine("Wątek 2: rozpoczynamy obliczenia...");
+            // Wykonanie jakichś obliczeń matematycznych lub innych akcji
+            Thread.Sleep(4000);
+            Console.WriteLine("Wątek 2: zakończono obliczenia.");
+        }
+        static void Obliczenia3()
+        {
+            Console.WriteLine("Wątek 3: rozpoczynamy obliczenia...");
+            // Wykonanie jakichś obliczeń matematycznych lub innych akcji
+            Thread.Sleep(6000);
+            Console.WriteLine("Wątek 3: zakończono obliczenia.");
+        }
+
         public static void TworzenieKilkuWatkow()
         {
             ThreadStart WatekN = new ThreadStart(WezwanieWatkuPochodnego);

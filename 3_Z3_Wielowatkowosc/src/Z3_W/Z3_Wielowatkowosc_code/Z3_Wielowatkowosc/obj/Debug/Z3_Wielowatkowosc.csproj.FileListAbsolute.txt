@@ -1,0 +1,8 @@
+C:\Users\luqasz\source\repos\Z3_Wielowatkowosc_code\Z3_Wielowatkowosc\bin\Debug\Z3_Wielowatkowosc.exe.config
+C:\Users\luqasz\source\repos\Z3_Wielowatkowosc_code\Z3_Wielowatkowosc\bin\Debug\Z3_Wielowatkowosc.exe
+C:\Users\luqasz\source\repos\Z3_Wielowatkowosc_code\Z3_Wielowatkowosc\bin\Debug\Z3_Wielowatkowosc.pdb
+C:\Users\luqasz\source\repos\Z3_Wielowatkowosc_code\Z3_Wielowatkowosc\obj\Debug\Z3_Wielowatkowosc.csproj.AssemblyReference.cache
+C:\Users\luqasz\source\repos\Z3_Wielowatkowosc_code\Z3_Wielowatkowosc\obj\Debug\Z3_Wielowatkowosc.csproj.SuggestedBindingRedirects.cache
+C:\Users\luqasz\source\repos\Z3_Wielowatkowosc_code\Z3_Wielowatkowosc\obj\Debug\Z3_Wielowatkowosc.csproj.CoreCompileInputs.cache
+C:\Users\luqasz\source\repos\Z3_Wielowatkowosc_code\Z3_Wielowatkowosc\obj\Debug\Z3_Wielowatkowosc.exe
+C:\Users\luqasz\source\repos\Z3_Wielowatkowosc_code\Z3_Wielowatkowosc\obj\Debug\Z3_Wielowatkowosc.pdb
