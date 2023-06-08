@@ -10,6 +10,7 @@ using System.Windows.Forms;
 // (1) public static class Score_Wynik
 // (2) public class Brick_Cegielka
 // (3) public class Paddle_Plytka
+// (4) public class Ball_Pileczka
 
 namespace PolishBrickBreaker
 {
@@ -20,7 +21,7 @@ namespace PolishBrickBreaker
         private PolishBrickBreaker form;
         private List<PictureBox> bricks;
 
-        // metoda odnoszaca sie do tworzenia cegielek
+        // metoda odnoszaca sie do tworzenia cegielek [jest to nasz konstruktor]
         public Brick_Cegielka(PolishBrickBreaker form)
         {
             rand_los = new Random();

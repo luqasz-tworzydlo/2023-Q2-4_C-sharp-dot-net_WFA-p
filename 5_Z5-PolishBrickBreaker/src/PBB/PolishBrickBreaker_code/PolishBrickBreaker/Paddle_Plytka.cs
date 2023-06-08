@@ -11,6 +11,7 @@ using System.Windows.Forms;
 // (1) public static class Score_Wynik
 // (2) public class Brick_Cegielka
 // (3) public class Paddle_Plytka
+// (4) public class Ball_Pileczka
 
 namespace PolishBrickBreaker
 {
@@ -31,7 +32,7 @@ namespace PolishBrickBreaker
         }
         private PolishBrickBreaker form;
 
-        // metoda odnoszaca sie do plytki gracza i jej predkosci
+        // metoda odnoszaca sie do plytki gracza i jej predkosci [jest to nasz konstruktor]
         public Paddle_Plytka(PolishBrickBreaker form)
         {
             this.form = form;

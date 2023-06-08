@@ -10,6 +10,7 @@ using System.Windows.Forms;
 // (1) public static class Score_Wynik
 // (2) public class Brick_Cegielka
 // (3) public class Paddle_Plytka
+// (4) public class Ball_Pileczka
 
 namespace PolishBrickBreaker
 {
