@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\luqasz\\source\\repos\\Z3_WF_Multithreading\\Multithreading\\Multithreading.csproj": {}
+    "C:\\Users\\luqasz\\source\\repos\\Z3_WF_Multithreading_code\\Multithreading\\Multithreading.csproj": {}
   },
   "projects": {
-    "C:\\Users\\luqasz\\source\\repos\\Z3_WF_Multithreading\\Multithreading\\Multithreading.csproj": {
+    "C:\\Users\\luqasz\\source\\repos\\Z3_WF_Multithreading_code\\Multithreading\\Multithreading.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\luqasz\\source\\repos\\Z3_WF_Multithreading\\Multithreading\\Multithreading.csproj",
+        "projectUniqueName": "C:\\Users\\luqasz\\source\\repos\\Z3_WF_Multithreading_code\\Multithreading\\Multithreading.csproj",
         "projectName": "Multithreading",
-        "projectPath": "C:\\Users\\luqasz\\source\\repos\\Z3_WF_Multithreading\\Multithreading\\Multithreading.csproj",
+        "projectPath": "C:\\Users\\luqasz\\source\\repos\\Z3_WF_Multithreading_code\\Multithreading\\Multithreading.csproj",
         "packagesPath": "C:\\Users\\luqasz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\luqasz\\source\\repos\\Z3_WF_Multithreading\\Multithreading\\obj\\",
+        "outputPath": "C:\\Users\\luqasz\\source\\repos\\Z3_WF_Multithreading_code\\Multithreading\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\luqasz\\AppData\\Roaming\\NuGet\\NuGet.Config"

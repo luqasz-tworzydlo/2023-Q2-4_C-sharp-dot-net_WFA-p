@@ -6,6 +6,20 @@ using System.Threading.Tasks;
 
 using System.Threading;
 
+
+//////////////////////////////////////////////////
+//
+// => Imię i nazwisko: Łukasz Tworzydło
+// => Numer albumu: gd29623
+// => Nr. kierunku: INIS4_PR2.2
+// => Przedmiot: Programowanie .NET
+//
+//////////////////////////////////////////////////
+//
+// Łukasz Tworzydło - nr albumu: gd29623 [projekt nr 3]
+//
+//////////////////////////////////////////////////
+
 namespace Z3_Wielowatkowosc
 {
     internal class Program
@@ -72,7 +86,7 @@ namespace Z3_Wielowatkowosc
                 }
                 Console.WriteLine($"Wątek 1: Wynik obliczeń z 100'000 iteracji pętli wynosi = {wynik_obliczen}");
             }
-            // powyższa operacja matematyczna wykonuje 1 milion iteracji pętli for
+            // powyższa operacja matematyczna wykonuje 100'000 iteracji pętli for
             // oraz dla każdej wartości wylicza sinus oraz cosinus, a następnie
             // dodaje je do zmiennej wynik_obliczen
             Thread.Sleep(5000);
@@ -88,7 +102,7 @@ namespace Z3_Wielowatkowosc
                 wynik_silnia *= i;
             }
             Console.WriteLine($"Wątek 2: Wynik obliczeń silnii z 100'000 wynosi = {wynik_silnia}");
-            // powyższa operacja matematyczna oblicza silnię z liczby 1000,
+            // powyższa operacja matematyczna oblicza silnię z liczby 100'000,
             // (obliczenie dłuższych operacji jest możliwe do wykonania
             // w sposób nieco szybszy dzięki wykorzystania wielowątkowości,
             // która pozwala na równoległe obliczenie długiej operacji);
@@ -123,9 +137,9 @@ namespace Z3_Wielowatkowosc
                     continue;
                 }
             }
-            Console.WriteLine($"Wątek 3: Wynik obliczeń sumy liczb parzystych od 0 do 1'000'000 wynosi: {suma_liczb_parzystych}");
-
-            // powyższa operacja matematyczna
+            Console.WriteLine($"Wątek 3: Wynik obliczeń sumy liczb parzystych [dodatnich] od 0 do 1'000'000 wynosi: {suma_liczb_parzystych}");
+            // powyższa operacja matematyczna wykonuje obliczenia sumy liczb parzystych w zakresie
+            // od 0 do 1'000'000 z zaznaczeniem, iż muszą wszystkie liczby być liczbami dodatnimi
             Thread.Sleep(6000);
             Console.WriteLine("=> Wątek 3: zakończono obliczenia.");
         }

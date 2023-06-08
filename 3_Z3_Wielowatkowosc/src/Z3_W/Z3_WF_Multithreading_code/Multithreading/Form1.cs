@@ -1,6 +1,19 @@
 using System.Numerics;
 using System.Threading;
 
+//////////////////////////////////////////////////
+//
+// => Imie i nazwisko: Lukasz Tworzydlo
+// => Numer albumu: gd29623
+// => Nr. kierunku: INIS4_PR2.2
+// => Przedmiot: Programowanie .NET
+//
+//////////////////////////////////////////////////
+//
+// Lukasz Tworzydlo - nr albumu: gd29623 [projekt nr 3]
+//
+//////////////////////////////////////////////////
+
 namespace Multithreading
 {
     public partial class Form1 : Form
@@ -9,10 +22,6 @@ namespace Multithreading
         {
             InitializeComponent();
         }
-
-        //Color myRed = Color.FromArgb(217, 83, 79);
-        //Color myBlue = Color.FromArgb(138, 202, 222);
-        //Color myGreen = Color.FromArgb(140, 172, 106);
 
         Thread thread1;
         Thread thread2;
@@ -42,13 +51,13 @@ namespace Multithreading
             Thread thread2 = new Thread(() =>
             {
                 BigInteger wynik_silnia = 1;
-                for (int i = 2; i <=25; i++)
+                for (int i = 2; i <=32; i++)
                 {
                     wynik_silnia *= i;
                 }
                 label5.Invoke(new Action(() =>
                 {
-                    label5.Text = $"Wynik obliczen silnii z 25 wynosi\n= {wynik_silnia}";
+                    label5.Text = $"Wynik obliczen silnii z 32 wynosi\n= {wynik_silnia}";
                 }));
             });
             thread2.Start();
@@ -70,8 +79,8 @@ namespace Multithreading
                         suma_liczb_parzystych -= i;
                     }
                 }*/
-                int suma_liczb_parzystych = 0;
-                for (int i = 0; i < 1000000; i++)
+                BigInteger suma_liczb_parzystych = 0;
+                for (int i = 0; i < 100000000; i++)
                 {
                     if (i % 2 == 0)
                     {
@@ -84,7 +93,7 @@ namespace Multithreading
                 }
                 label6.Invoke(new Action(() =>
                 {
-                    label6.Text = $"Wynik obliczen sumy liczb parzystych\nod 0 do 1'000'000 wynosi= {suma_liczb_parzystych}";
+                    label6.Text = $"Wynik obliczen sumy liczb parzystych [dodatnich]\nod 0 do 100'000'000 wynosi= {suma_liczb_parzystych}";
                 }));
             });
             thread3.Start();
