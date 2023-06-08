@@ -99,7 +99,7 @@ namespace Z3_Wielowatkowosc
         {
             Console.WriteLine("=> Wątek 3: rozpoczynamy obliczenia...");
             // wykonanie jakichś obliczeń matematycznych lub innych akcji
-            int suma_liczb_parzystych = 0;
+            /*int suma_liczb_parzystych = 0;
             for (int i = 0; i < 1000000; i++)
             {
                 if (i % 2 == 0)
@@ -109,6 +109,18 @@ namespace Z3_Wielowatkowosc
                 else
                 {
                     suma_liczb_parzystych -= i;
+                }
+            }*/
+            int suma_liczb_parzystych = 0;
+            for (int i = 0; i < 1000000; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    suma_liczb_parzystych += i;
+                }
+                else
+                {
+                    continue;
                 }
             }
             Console.WriteLine($"Wątek 3: Wynik obliczeń sumy liczb parzystych od 0 do 1'000'000 wynosi: {suma_liczb_parzystych}");
