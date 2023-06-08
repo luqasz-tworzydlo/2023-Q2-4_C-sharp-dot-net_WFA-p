@@ -47,7 +47,6 @@
             this.picBall.TabIndex = 0;
             this.picBall.TabStop = false;
             this.picBall.Visible = false;
-            this.picBall.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // timer
             // 
@@ -70,6 +69,7 @@
             this.Name = "PolishBrickBreaker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PolishBrickBreaker";
+            this.Load += new System.EventHandler(this.PolishBrickBreaker_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picBall)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -34,7 +34,7 @@ namespace PolishBrickBreaker
                 Visible = true
             };
 
-            init();
+            init_inicjowanie();
         }
 
         // metoda odnoszaca sie do kolorowania cegielek na planszy
@@ -66,10 +66,12 @@ namespace PolishBrickBreaker
             return color_kolor;
         }
 
-        private void init()
+        // metoda odnoszaca sie do generowania (inicjowania) naszych cegielek
+        private void init_inicjowanie()
         {
             GetAllBricks_PobierzWszystkieCegielki();
             SetBrickLeftTop_UstawCegielkeLewaGora();
+            form.Controls.Add(brick);
         }
 
         // metoda odnoszaca sie do odpowiedniego ustawienia cegielek,
