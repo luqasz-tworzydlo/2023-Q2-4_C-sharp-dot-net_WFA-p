@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -70,6 +71,53 @@ namespace PolishBrickBreaker
                 // dodanie naszej plytki do naszej planszy [form],
                 // czyli dodanie trzech czesci naszej plytki
                 form.Controls.Add(PlayerPaddles_PlytkiGracza[i]);
+            }
+        }
+        // metoda odnoszaca sie do ruchu naszej plytki do gry,
+        // gdzie beda uzywane dwa klawisze [lewa i prawa strzalka]
+        // w celu poruszanie plytki od prawej do lewej na szerokosci
+        // naszej planszy / formularza [form], czyli horyzontalnie
+        public void PaddleMove_RuchPlytki(KeyEventArgs e)
+        {
+            for (int i =0; i < 3; i++)
+            {
+                // instrukcja przesuniecia plytki na lewo,
+                // w przypadku wcisniecia lewej strzalki
+                if (e.KeyCode == Keys.Left)
+                    PlayerPaddles_PlytkiGracza[i].Left -= Speed_Predkosc;
+                
+                // instrukcja przesuniecia plytki na prawo,
+                // w przypadku wcisniecia prawej strzalki
+                if (e.KeyCode == Keys.Right)
+                    PlayerPaddles_PlytkiGracza[i].Left += Speed_Predkosc;
+            }
+
+            PaddleAtEdge_PlytkaNaKrawedzi();
+        }
+        // metoda odnoszaca sie do weryfikacji, sprawdzania
+        // polozenia naszej plytki na planszy / formularzu
+        private void PaddleAtEdge_PlytkaNaKrawedzi()
+        {
+            // sprawdzenie, czy lewa czesc naszej plytki
+            // znajduje sie na pozycji rownej lub mniejszej 0
+            // [jesli tak to uniemozliwienie dalsze przesuwanie
+            // oraz odbicie naszej plytki (a wiec wszystkich
+            // czesci naszej plytki) od lewej krawedzi]
+            if (PlayerPaddles_PlytkiGracza[0].Left <= 0)
+            {
+                PlayerPaddles_PlytkiGracza[0].Left = 0; // lewa czesc naszej plytki
+                PlayerPaddles_PlytkiGracza[1].Left = PlayerPaddles_PlytkiGracza[0].Width; // srodkowa czesc naszej plytki
+                PlayerPaddles_PlytkiGracza[2].Left = PlayerPaddles_PlytkiGracza[0].Width + PlayerPaddles_PlytkiGracza[1].Width; // prawa czesc naszej plytki
+
+            }
+
+            // sprawdzenie, czy prawa czesc znajduje sie na krawedzi
+            // naszego formularza [na takiej samej zasadzie, jak przy lewej]
+            else if (PlayerPaddles_PlytkiGracza[2].Right >= form.ClientSize.Width)
+            {
+                PlayerPaddles_PlytkiGracza[0].Left = form.ClientSize.Width - PlayerPaddles_PlytkiGracza[0].Width - PlayerPaddles_PlytkiGracza[1].Width - PlayerPaddles_PlytkiGracza[2].Width; // lewa czesc plytki
+                PlayerPaddles_PlytkiGracza[1].Left = form.ClientSize.Width - PlayerPaddles_PlytkiGracza[1].Width - PlayerPaddles_PlytkiGracza[2].Width; // srodkowa czesc plytki
+                PlayerPaddles_PlytkiGracza[2].Left = form.ClientSize.Width - PlayerPaddles_PlytkiGracza[2].Width; // prawa czesc plytki
             }
         }
     }
