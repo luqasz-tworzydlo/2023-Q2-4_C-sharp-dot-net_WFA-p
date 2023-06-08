@@ -12,79 +12,14 @@ namespace Z3_Wielowatkowosc
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Rozpoczynamy przykład wielowątkowości...");
+            JakieJestDzialanieProgramu();
 
-            // Tworzenie trzech obiektów Thread i przypisanie im metod do wykonania
-            Thread t1 = new Thread(new ThreadStart(Obliczenia1));
-            Thread t2 = new Thread(new ThreadStart(Obliczenia2));
-            Thread t3 = new Thread(new ThreadStart(Obliczenia3));
+            DemonstracjaDzialaniaWielowatkowosci();
 
-            // Uruchomienie trzech wątków równolegle
-            t1.Start();
-            t2.Start();
-            t3.Start();
-
-            // Oczekiwanie na zakończenie wszystkich wątków przed zakończeniem aplikacji
-            t1.Join();
-            t2.Join();
-            t3.Join();
-
-            Console.WriteLine("Przykład wielowątkowości został zakończony.");
-
-            //JakieJestDzialanieProgramu();
-
-            //GlownyWatek_MultiThreading();
-            //DodatkoweOddzielenieA();
-            //TworzenieKilkuWatkow();
-
-            //WprowadzenieDoDefinicjiWielowatkowosci();
+            WprowadzenieDoDefinicjiWielowatkowosci();
 
             Console.ReadKey();
         }
-        public static void GlownyWatek_MultiThreading()
-        {
-            // Thread umożliwia nam pracę z wątkami
-            Thread Watek = Thread.CurrentThread;
-            Watek.Name = "GłównyWątek (testowanie działania)";
-            Console.WriteLine("To jest: {0}", Watek.Name);
-        }
-        // Metody wykonywane przez trzy wątki
-        static void Obliczenia1()
-        {
-            Console.WriteLine("Wątek 1: rozpoczynamy obliczenia...");
-            // Wykonanie jakichś obliczeń matematycznych lub innych akcji
-            Thread.Sleep(5000);
-            Console.WriteLine("Wątek 1: zakończono obliczenia.");
-        }
-        static void Obliczenia2()
-        {
-            Console.WriteLine("Wątek 2: rozpoczynamy obliczenia...");
-            // Wykonanie jakichś obliczeń matematycznych lub innych akcji
-            Thread.Sleep(4000);
-            Console.WriteLine("Wątek 2: zakończono obliczenia.");
-        }
-        static void Obliczenia3()
-        {
-            Console.WriteLine("Wątek 3: rozpoczynamy obliczenia...");
-            // Wykonanie jakichś obliczeń matematycznych lub innych akcji
-            Thread.Sleep(6000);
-            Console.WriteLine("Wątek 3: zakończono obliczenia.");
-        }
-
-        public static void TworzenieKilkuWatkow()
-        {
-            ThreadStart WatekN = new ThreadStart(WezwanieWatkuPochodnego);
-            Console.WriteLine("(GW) Główny wątek: Utworzenie wątku pochodnego");
-            Thread pochodnyWatek = new Thread(WatekN);
-            // Uruchamiamy wątek pochodny
-            pochodnyWatek.Start();
-        }
-        public static void WezwanieWatkuPochodnego()
-        {
-            // WezwanieWatkuPochodnego to inaczej CallToChildThread
-            Console.WriteLine("(WP) Rozpoczęcie wątku pochodnego");
-        }
-
         public static void JakieJestDzialanieProgramu()
         {
             DodatkoweOddzielenieA();
@@ -94,6 +29,93 @@ namespace Z3_Wielowatkowosc
             DodatkoweOddzielenieA();
 
             KontynuacjaProgramu();
+        }
+        public static void DemonstracjaDzialaniaWielowatkowosci()
+        {
+            Console.WriteLine("Demonstracja zasady działania wielowątkowości...\n");
+
+            // poniżej są utworzone trzy obiekty Thread
+            // oraz mają przypisane do siebie metodę do wykonania
+            Thread t1 = new Thread(new ThreadStart(WielowatkowoscObliczeniaNr1));
+            Thread t2 = new Thread(new ThreadStart(WielowatkowoscObliczeniaNr2));
+            Thread t3 = new Thread(new ThreadStart(WielowatkowoscObliczeniaNr3));
+
+            // t1, t2 oraz t3 odnoszą się do słowa 'threading' (czyli wielowątkowość)
+
+            // metody, które są wykonywane przez trzy wątki to: WielowatkowoscObliczeniaNr1,
+            // WielowatkowoscObliczeniaNr2, jak i również WielowatkowoscObliczeniaNr3
+
+            // poniżej jest uruchomienie trzech wątków równolegle w sposób równoległy
+            t1.Start();
+            t2.Start();
+            t3.Start();
+
+            // poniżej jest oczekiwanie na zakończenie
+            // wszystkich wątków przed zakończeniem aplikacji
+            t1.Join();
+            t2.Join();
+            t3.Join();
+
+            Console.WriteLine("\nPrzykład wielowątkowości został zakończony.\n");
+
+            KontynuacjaProgramu();
+        }
+        static void WielowatkowoscObliczeniaNr1()
+        {
+            Console.WriteLine("=> Wątek 1: rozpoczynamy obliczenia...");
+            // wykonanie jakichś obliczeń matematycznych lub innych akcji
+            {
+                double wynik_obliczen = 0;
+                for (int i = 0; i < 100000; i++)
+                {
+                    wynik_obliczen += Math.Sin(i) * Math.Cos(i);
+                }
+                Console.WriteLine($"Wątek 1: Wynik obliczeń z 100'000 iteracji pętli wynosi = {wynik_obliczen}");
+            }
+            // powyższa operacja matematyczna wykonuje 1 milion iteracji pętli for
+            // oraz dla każdej wartości wylicza sinus oraz cosinus, a następnie
+            // dodaje je do zmiennej wynik_obliczen
+            Thread.Sleep(5000);
+            Console.WriteLine("=> Wątek 1: zakończono obliczenia.");
+        }
+        static void WielowatkowoscObliczeniaNr2()
+        {
+            Console.WriteLine("=> Wątek 2: rozpoczynamy obliczenia...");
+            // wykonanie jakichś obliczeń matematycznych lub innych akcji
+            Int64 wynik_silnia = 1;
+            for (int i = 2; i <= 100000; i++)
+            {
+                wynik_silnia *= i;
+            }
+            Console.WriteLine($"Wątek 2: Wynik obliczeń silnii z 100'000 wynosi = {wynik_silnia}");
+            // powyższa operacja matematyczna oblicza silnię z liczby 1000,
+            // (obliczenie dłuższych operacji jest możliwe do wykonania
+            // w sposób nieco szybszy dzięki wykorzystania wielowątkowości,
+            // która pozwala na równoległe obliczenie długiej operacji);
+            Thread.Sleep(4000);
+            Console.WriteLine("=> Wątek 2: zakończono obliczenia.");
+        }
+        static void WielowatkowoscObliczeniaNr3()
+        {
+            Console.WriteLine("=> Wątek 3: rozpoczynamy obliczenia...");
+            // wykonanie jakichś obliczeń matematycznych lub innych akcji
+            int suma_liczb_parzystych = 0;
+            for (int i = 0; i < 1000000; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    suma_liczb_parzystych += i;
+                }
+                else
+                {
+                    suma_liczb_parzystych -= i;
+                }
+            }
+            Console.WriteLine($"Wątek 3: Wynik obliczeń sumy liczb parzystych od 0 do 1'000'000 wynosi: {suma_liczb_parzystych}");
+
+            // powyższa operacja matematyczna
+            Thread.Sleep(6000);
+            Console.WriteLine("=> Wątek 3: zakończono obliczenia.");
         }
         public static void KontynuacjaProgramu()
         {
@@ -116,7 +138,7 @@ namespace Z3_Wielowatkowosc
         }
         public static void WprowadzenieDoDefinicjiWielowatkowosci()
         {
-            DodatkoweOddzielenieA();
+            DodatkoweOddzielenieB();
             Console.WriteLine("Po zakończeniu demonstracji zasad działania" +
                 "\nwielowątkowości teraz zostanie w krótki sposób" +
                 "\nwyjaśnione czym jest wielowątkowość i jak działa");
