@@ -9,6 +9,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//////////////////////////////////////////////////
+//
+// => Imię i nazwisko: Łukasz Tworzydło
+// => Numer albumu: gd29623
+// => Nr. kierunku: INIS4_PR2.2
+// => Przedmiot: Programowanie .NET
+//
+//////////////////////////////////////////////////
+//
+// Łukasz Tworzydło - nr albumu: gd29623 [projekt nr 5]
+//
+//////////////////////////////////////////////////
+
 namespace PolishBrickBreaker
 {
     public partial class PolishBrickBreaker : Form
@@ -115,7 +128,6 @@ namespace PolishBrickBreaker
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 15)
             {
                 ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 5;
-                paddle_plytka.Speed_Predkosc = 5;
             }
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 10)
             {
