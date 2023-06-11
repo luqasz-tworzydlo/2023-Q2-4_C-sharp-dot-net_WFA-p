@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -40,6 +41,9 @@ namespace PolishBrickBreaker
             for (int i = 0; i < NumberOfBricks_NumerCegielek; i++)
             {
                 bricks.Add(new Brick_Cegielka(this));
+                Thread.Sleep(10); // spowolnienie generowania
+                // w celu stworzenia bardziej roznorodnych
+                // kolorow cegielek [bricks] w grze
             }
         }
 
@@ -69,21 +73,21 @@ namespace PolishBrickBreaker
             if (Score_Wynik.GetScore_OtrzymajWynik >= 20)
             {
                 // podniesiona predkosc naszej pileczki na planszy [form]
-                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 1;
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 7;
                 // podniesiona predkosc poruszania plytki na planszy
                 paddle_plytka.Speed_Predkosc = 7;
             }
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 15)
             {
                 // podniesiona predkosc naszej pileczki na planszy [form]
-                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 1;
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 5;
                 // podniesiona predkosc poruszania plytki na planszy
                 paddle_plytka.Speed_Predkosc = 6;
             }
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 10)
             {
                 // podniesiona predkosc naszej pileczki na planszy [form]
-                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 1;
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 3;
             }
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 5)
             {
