@@ -8,14 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//////////////////////////////////////////////////
+//
+// => Imię i nazwisko: Łukasz Tworzydło
+// => Numer albumu: gd29623
+// => Nr. kierunku: INIS4_PR2.2
+// => Przedmiot: Programowanie .NET
+//
+//////////////////////////////////////////////////
+//
+// Łukasz Tworzydło - nr albumu: gd29623 [projekt dodatkowy]
+//
+//////////////////////////////////////////////////
+
 namespace SimpleSudokuGame
 {
     public partial class Form1 : Form
     {
-        const int n = 3;
+        const int n_value = 3;
         const int sizeButton = 50;
-        public int[,] map = new int[n * n, n * n];
-        public Button[,] buttons = new Button[n * n, n * n];
+        public int[,] map = new int[n_value * n_value, n_value * n_value];
+        public Button[,] buttons = new Button[n_value * n_value, n_value * n_value];
         public Form1()
         {
             InitializeComponent();
@@ -24,23 +37,18 @@ namespace SimpleSudokuGame
 
         public void SudokuGenerateBoard_SudokuGenerowaniePlanszy()
         {
-            for (int i = 0; i < n * n; i++)
+            for (int i_value = 0; i_value < n_value * n_value; i_value++)
             {
-                for (int j = 0; j < n * n; j++)
+                for (int j_value = 0; j_value < n_value * n_value; j_value++)
                 {
-                    map[i, j] = (i * n + i / n + j) % (n * n) + 1;
-                    buttons[i, j] = new Button();
+                    map[i_value, j_value] = (i_value * n_value + i_value / n_value + j_value) % (n_value * n_value) + 1;
+                    buttons[i_value, j_value] = new Button();
                 }
             }
-            //MatrixTransposition();
-            //SwapRowsInBlock();
-            //SwapColumnsInBlock();
-            //SwapBlocksInRow();
-            //SwapBlocksInColumn();
-            Random r = new Random();
-            for (int i = 0; i < 40; i++)
+            Random rand_los = new Random();
+            for (int i_value = 0; i_value < 50; i_value++)
             {
-                ShuffleBoard_WymieszajPlansze(r.Next(0, 5));
+                ShuffleBoard_WymieszajPlansze(rand_los.Next(0, 5));
             }
 
             SudokuCreateBoard_SudokuStworzPlansze();
@@ -49,35 +57,35 @@ namespace SimpleSudokuGame
 
         public void SudokuHideCells_SudokuUkryjKomorki()
         {
-            int N = 40;
+            int NumberOfHiddenCells_LiczbaUkrytychKomorek = 50;
             Random r = new Random();
-            while (N > 0)
+            while (NumberOfHiddenCells_LiczbaUkrytychKomorek > 0)
             {
-                for (int i = 0; i < n * n; i++)
+                for (int i_value = 0; i_value < n_value * n_value; i_value++)
                 {
-                    for (int j = 0; j < n * n; j++)
+                    for (int j_value = 0; j_value < n_value * n_value; j_value++)
                     {
-                        if (!string.IsNullOrEmpty(buttons[i, j].Text))
+                        if (!string.IsNullOrEmpty(buttons[i_value, j_value].Text))
                         {
-                            int a = r.Next(0, 3);
-                            buttons[i, j].Text = a == 0 ? "" : buttons[i, j].Text;
-                            buttons[i, j].Enabled = a == 0 ? true : false;
+                            int a_value = r.Next(0, 3);
+                            buttons[i_value, j_value].Text = a_value == 0 ? "" : buttons[i_value, j_value].Text;
+                            buttons[i_value, j_value].Enabled = a_value == 0 ? true : false;
 
-                            if (a == 0)
-                                N--;
-                            if (N <= 0)
+                            if (a_value == 0)
+                                NumberOfHiddenCells_LiczbaUkrytychKomorek--;
+                            if (NumberOfHiddenCells_LiczbaUkrytychKomorek <= 0)
                                 break;
                         }
                     }
-                    if (N <= 0)
+                    if (NumberOfHiddenCells_LiczbaUkrytychKomorek <= 0)
                         break;
                 }
             }
         }
 
-        public void ShuffleBoard_WymieszajPlansze(int i)
+        public void ShuffleBoard_WymieszajPlansze(int i_value)
         {
-            switch (i)
+            switch (i_value)
             {
                 case 0:
                     MatrixTransposition_TranspozycjaMacierzy();
@@ -102,22 +110,22 @@ namespace SimpleSudokuGame
 
         public void SwapBlocksInColumn_ZamianaBlokuWKolumnie()
         {
-            Random r = new Random();
-            var block1 = r.Next(0, n);
-            var block2 = r.Next(0, n);
+            Random rand_los = new Random();
+            var block1 = rand_los.Next(0, n_value);
+            var block2 = rand_los.Next(0, n_value);
             while (block1 == block2)
-                block2 = r.Next(0, n);
-            block1 *= n;
-            block2 *= n;
-            for (int i = 0; i < n * n; i++)
+                block2 = rand_los.Next(0, n_value);
+            block1 *= n_value;
+            block2 *= n_value;
+            for (int i_value = 0; i_value < n_value * n_value; i_value++)
             {
-                var k = block2;
-                for (int j = block1; j < block1 + n; j++)
+                var k_value = block2;
+                for (int j_value = block1; j_value < block1 + n_value; j_value++)
                 {
-                    var temp = map[i, j];
-                    map[i, j] = map[i, k];
-                    map[i, k] = temp;
-                    k++;
+                    var temp = map[i_value, j_value];
+                    map[i_value, j_value] = map[i_value, k_value];
+                    map[i_value, k_value] = temp;
+                    k_value++;
                 }
             }
         }
@@ -125,21 +133,21 @@ namespace SimpleSudokuGame
         public void SwapBlocksInRow_ZamianaBlokowWRzedzie()
         {
             Random r = new Random();
-            var block1 = r.Next(0, n);
-            var block2 = r.Next(0, n);
+            var block1 = r.Next(0, n_value);
+            var block2 = r.Next(0, n_value);
             while (block1 == block2)
-                block2 = r.Next(0, n);
-            block1 *= n;
-            block2 *= n;
-            for (int i = 0; i < n * n; i++)
+                block2 = r.Next(0, n_value);
+            block1 *= n_value;
+            block2 *= n_value;
+            for (int i_value = 0; i_value < n_value * n_value; i_value++)
             {
-                var k = block2;
-                for (int j = block1; j < block1 + n; j++)
+                var k_value = block2;
+                for (int j_value = block1; j_value < block1 + n_value; j_value++)
                 {
-                    var temp = map[j, i];
-                    map[j, i] = map[k, i];
-                    map[k, i] = temp;
-                    k++;
+                    var temp = map[j_value, i_value];
+                    map[j_value, i_value] = map[k_value, i_value];
+                    map[k_value, i_value] = temp;
+                    k_value++;
                 }
             }
         }
@@ -147,64 +155,64 @@ namespace SimpleSudokuGame
         public void SwapRowsInBlock_ZamianaWierszyWRzedzie()
         {
             Random r = new Random();
-            var block = r.Next(0, n);
-            var row1 = r.Next(0, n);
-            var line1 = block * n + row1;
-            var row2 = r.Next(0, n);
+            var block = r.Next(0, n_value);
+            var row1 = r.Next(0, n_value);
+            var line1 = block * n_value + row1;
+            var row2 = r.Next(0, n_value);
             while (row1 == row2)
-                row2 = r.Next(0, n);
-            var line2 = block * n + row2;
-            for (int i = 0; i < n * n; i++)
+                row2 = r.Next(0, n_value);
+            var line2 = block * n_value + row2;
+            for (int i_value = 0; i_value < n_value * n_value; i_value++)
             {
-                var temp = map[line1, i];
-                map[line1, i] = map[line2, i];
-                map[line2, i] = temp;
+                var temp = map[line1, i_value];
+                map[line1, i_value] = map[line2, i_value];
+                map[line2, i_value] = temp;
             }
         }
 
         public void SwapColumnsInBlock_ZamianaKolumnWKolumnie()
         {
             Random r = new Random();
-            var block = r.Next(0, n);
-            var row1 = r.Next(0, n);
-            var line1 = block * n + row1;
-            var row2 = r.Next(0, n);
+            var block = r.Next(0, n_value);
+            var row1 = r.Next(0, n_value);
+            var line1 = block * n_value + row1;
+            var row2 = r.Next(0, n_value);
             while (row1 == row2)
-                row2 = r.Next(0, n);
-            var line2 = block * n + row2;
-            for (int i = 0; i < n * n; i++)
+                row2 = r.Next(0, n_value);
+            var line2 = block * n_value + row2;
+            for (int i_value = 0; i_value < n_value * n_value; i_value++)
             {
-                var temp = map[i, line1];
-                map[i, line1] = map[i, line2];
-                map[i, line2] = temp;
+                var temp = map[i_value, line1];
+                map[i_value, line1] = map[i_value, line2];
+                map[i_value, line2] = temp;
             }
         }
 
         public void MatrixTransposition_TranspozycjaMacierzy()
         {
-            int[,] tMap = new int[n * n, n * n];
-            for (int i = 0; i < n * n; i++)
+            int[,] tBoard_tPlanszy = new int[n_value * n_value, n_value * n_value];
+            for (int i = 0; i < n_value * n_value; i++)
             {
-                for (int j = 0; j < n * n; j++)
+                for (int j = 0; j < n_value * n_value; j++)
                 {
-                    tMap[i, j] = map[j, i];
+                    tBoard_tPlanszy[i, j] = map[j, i];
                 }
             }
-            map = tMap;
+            map = tBoard_tPlanszy;
         }
 
         public void SudokuCreateBoard_SudokuStworzPlansze()
         {
-            for (int i = 0; i < n * n; i++)
+            for (int i_value = 0; i_value < n_value * n_value; i_value++)
             {
-                for (int j = 0; j < n * n; j++)
+                for (int j_value = 0; j_value < n_value * n_value; j_value++)
                 {
                     Button button = new Button();
-                    buttons[i, j] = button;
+                    buttons[i_value, j_value] = button;
                     button.Size = new Size(sizeButton, sizeButton);
-                    button.Text = map[i, j].ToString();
+                    button.Text = map[i_value, j_value].ToString();
                     button.Click += CellClicked_KliknietaKomorka;
-                    button.Location = new Point(j * sizeButton, i * sizeButton);
+                    button.Location = new Point(j_value * sizeButton, i_value * sizeButton);
                     this.Controls.Add(button);
                 }
             }
@@ -212,31 +220,31 @@ namespace SimpleSudokuGame
 
         public void CellClicked_KliknietaKomorka(object sender, EventArgs e)
         {
-            Button pressedButton = sender as Button;
-            string buttonText = pressedButton.Text;
-            if (string.IsNullOrEmpty(buttonText))
+            Button pressedButton_wcisnietyPrzycisk = sender as Button;
+            string buttonText_tekstPrzycisku = pressedButton_wcisnietyPrzycisk.Text;
+            if (string.IsNullOrEmpty(buttonText_tekstPrzycisku))
             {
-                pressedButton.Text = "1";
+                pressedButton_wcisnietyPrzycisk.Text = "1";
             }
             else
             {
-                int num = int.Parse(buttonText);
-                num++;
-                if (num == 10)
-                    num = 1;
-                pressedButton.Text = num.ToString();
+                int num_value = int.Parse(buttonText_tekstPrzycisku);
+                num_value++;
+                if (num_value == 10)
+                    num_value = 1;
+                pressedButton_wcisnietyPrzycisk.Text = num_value.ToString();
             }
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < n * n; i++)
+            for (int i_value = 0; i_value < n_value * n_value; i_value++)
             {
-                for (int j = 0; j < n * n; j++)
+                for (int j_value = 0; j_value < n_value * n_value; j_value++)
                 {
-                    var btnText = buttons[i, j].Text;
-                    if (btnText != map[i, j].ToString())
+                    var btnText = buttons[i_value, j_value].Text;
+                    if (btnText != map[i_value, j_value].ToString())
                     {
                         MessageBox.Show("Plansza zostala zle wypełniona!\nSpróbuj jeszcze raz! :P");
                         return;
@@ -244,11 +252,11 @@ namespace SimpleSudokuGame
                 }
             }
             MessageBox.Show("Gratulacje! Udalo Ci sie!\nWypelniles/as prawidlowo cala plansze sudoku! ^_^");
-            for (int i = 0; i < n * n; i++)
+            for (int i_value = 0; i_value < n_value * n_value; i_value++)
             {
-                for (int j = 0; j < n * n; j++)
+                for (int j_value = 0; j_value < n_value * n_value; j_value++)
                 {
-                    this.Controls.Remove(buttons[i, j]);
+                    this.Controls.Remove(buttons[i_value, j_value]);
                 }
             }
             SudokuGenerateBoard_SudokuGenerowaniePlanszy();
