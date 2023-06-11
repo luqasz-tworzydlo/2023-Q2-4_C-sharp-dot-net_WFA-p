@@ -76,7 +76,7 @@ namespace PolishBrickBreaker
             // jesli nie ma juz cegielek to pileczka zniknie i gra sie zakonczy
 
             // sposob nr 1
-            if (form.Controls.OfType<PictureBox>().Where(t => t.Tag == "Brick / Cegielka").Count() == 0)
+            if (form.Controls.OfType<PictureBox>().Where(t => t.Tag == "Brick_Cegielka").Count() == 0)
             {
                 Score_Wynik.GameOver_KoniecGry = true;
                 MessageBox.Show("Congratulations! You win! ^_^ / Gratulacje! Wygrywasz! ^_^");
@@ -87,7 +87,7 @@ namespace PolishBrickBreaker
             /*var counter_licznik = 0;
             foreach(var item_obiekt in form.Controls.OfType<PictureBox>())
             {
-                if (item_obiekt.Tag == "Brick / Cegielka")
+                if (item_obiekt.Tag == "Brick_Cegielka")
                     counter_licznik++;
             }
             if (counter_licznik == 0)
@@ -110,15 +110,15 @@ namespace PolishBrickBreaker
             // poruszanie sie pileczki na formularzu / planszy [form] - nadanie predkosci na osi Y
             if (SpeedY_PredkoscY < 0)
             {
-                ball_pileczka.Left += SpeedY_PredkoscY - IncreasedSpeed_PodniesionaPredkosc;
+                ball_pileczka.Top += SpeedY_PredkoscY - IncreasedSpeed_PodniesionaPredkosc;
             }
             else if (SpeedY_PredkoscY > 0)
             {
-                ball_pileczka.Left += SpeedY_PredkoscY + IncreasedSpeed_PodniesionaPredkosc;
+                ball_pileczka.Top += SpeedY_PredkoscY + IncreasedSpeed_PodniesionaPredkosc;
             }
 
             // sprawdzenie, czy gra sie skonczyla czy nie [sprawdzamy wszystkie cegielki]
-            foreach(var item_obiekt in form.Controls.OfType<PictureBox>().Where(t => t.Tag == "Brick / Cegielka"))
+            foreach(var item_obiekt in form.Controls.OfType<PictureBox>().Where(t => t.Tag == "Brick_Cegielka"))
             {
                 // sprawdzamy, czy pileczka odbila sie od cegielki
                 if (ball_pileczka.Bounds.IntersectsWith(item_obiekt.Bounds))
@@ -131,7 +131,8 @@ namespace PolishBrickBreaker
                     // odwrocenie kierunku, w ktorym bedzie dalej isc pileczka,
                     // a wiec ustalenie, jaki przybierze kierunek pileczka
                     // po uderzeniu obiektu [po zbiciu cegielki] pileczka
-                    SpeedY_PredkoscY *= -1;
+                    // SpeedY_PredkoscY = SpeedY_PredkoscY * (-1) - SpeedY_PredkoscY;
+                    SpeedY_PredkoscY *= -1; // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 }
             }
 
@@ -193,7 +194,7 @@ namespace PolishBrickBreaker
             // jest odbita w przeciwnym kierunku, z ktorego przyszla pileczka
             else if (ball_pileczka.Top <= 0)
             {
-                SpeedY_PredkoscY *= -1;
+                SpeedY_PredkoscY = SpeedY_PredkoscY * (-1) - SpeedY_PredkoscY;
             }
             // sprawdzenie, czy pileczka uderzyla prawa badz lewa grawedx formularza / planszy [form]
             // => jesli uderzyla lewa krawedz to wtedy jest odbita w przeciwnym kierunku, od ktorego przyszla

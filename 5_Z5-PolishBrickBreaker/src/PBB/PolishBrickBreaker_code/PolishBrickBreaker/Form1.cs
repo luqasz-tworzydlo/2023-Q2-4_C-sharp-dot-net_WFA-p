@@ -49,7 +49,7 @@ namespace PolishBrickBreaker
             paddle_plytka.PaddleMove_RuchPlytki(e);
         }
 
-        // sprawdza
+        // sprawdzenie, czy trwa nadal nasza gra
         private void Timer_Tick(object sender, EventArgs e)
         {
             // sprawdzenie, czy jest koniec gry
@@ -69,21 +69,21 @@ namespace PolishBrickBreaker
             if (Score_Wynik.GetScore_OtrzymajWynik >= 20)
             {
                 // podniesiona predkosc naszej pileczki na planszy [form]
-                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 7;
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 1;
                 // podniesiona predkosc poruszania plytki na planszy
                 paddle_plytka.Speed_Predkosc = 7;
             }
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 15)
             {
                 // podniesiona predkosc naszej pileczki na planszy [form]
-                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 5;
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 1;
                 // podniesiona predkosc poruszania plytki na planszy
                 paddle_plytka.Speed_Predkosc = 6;
             }
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 10)
             {
                 // podniesiona predkosc naszej pileczki na planszy [form]
-                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 3;
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 1;
             }
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 5)
             {

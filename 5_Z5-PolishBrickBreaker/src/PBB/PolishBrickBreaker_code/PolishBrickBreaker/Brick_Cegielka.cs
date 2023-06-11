@@ -32,7 +32,7 @@ namespace PolishBrickBreaker
                 BackColor = GetColor_PobierzKolor(rand_los.Next(1, 7)),
                 Width = rand_los.Next(50, 101),
                 Height = rand_los.Next(10, 26),
-                Tag = "Brick / Cegielka",
+                Tag = "Brick_Cegielka",
                 Visible = true
             };
 
@@ -108,7 +108,7 @@ namespace PolishBrickBreaker
         // metoda odnoszaca sie do pobrania wszystkich cegielek
         private void GetAllBricks_PobierzWszystkieCegielki()
         {
-            foreach (var item_obiekt in form.Controls.OfType<PictureBox>().Where(t => t.Tag == "Brick / Cegielka"))
+            foreach (var item_obiekt in form.Controls.OfType<PictureBox>().Where(t => t.Tag == "Brick_Cegielka"))
             {
                 bricks.Add(item_obiekt);
             }
