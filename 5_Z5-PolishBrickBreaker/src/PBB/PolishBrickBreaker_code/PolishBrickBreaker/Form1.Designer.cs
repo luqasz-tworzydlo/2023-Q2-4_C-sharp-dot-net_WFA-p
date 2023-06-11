@@ -50,6 +50,7 @@
             // timer
             // 
             this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // PolishBrickBreaker
             // 
