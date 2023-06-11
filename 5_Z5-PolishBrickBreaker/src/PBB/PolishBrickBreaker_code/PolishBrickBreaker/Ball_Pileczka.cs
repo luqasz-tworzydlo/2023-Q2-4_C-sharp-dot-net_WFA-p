@@ -80,6 +80,8 @@ namespace PolishBrickBreaker
             {
                 Score_Wynik.GameOver_KoniecGry = true;
                 MessageBox.Show("Congratulations! You win! ^_^ / Gratulacje! Wygrywasz! ^_^");
+                MessageBox.Show("=> Your score: " + Score_Wynik.GetScore_OtrzymajWynik + " points" +
+                    "\n=> Twoj wynik: " + Score_Wynik.GetScore_OtrzymajWynik + " punktow");
                 return;
             }
 
@@ -94,6 +96,8 @@ namespace PolishBrickBreaker
             {
                 Score_Wynik.GameOver_KoniecGry = true;
                 MessageBox.Show("Congratulations! You win! ^_^ / Gratulacje! Wygrywasz! ^_^");
+                MessageBox.Show("=> Your score: " + Score_Wynik.GetScore_OtrzymajWynik + " points" +
+                    "\n=> Twoj wynik: " + Score_Wynik.GetScore_OtrzymajWynik + " punktow");
                 return;
             }*/
 
@@ -181,11 +185,28 @@ namespace PolishBrickBreaker
                 {
                     Score_Wynik.GameOver_KoniecGry = true;
                     MessageBox.Show("Game Over! You lose... :< / Koniec gry! Przegrales... :<");
+                    MessageBox.Show("=> Your score: " + Score_Wynik.GetScore_OtrzymajWynik + " points" +
+                        "\n=> Twoj wynik: " + Score_Wynik.GetScore_OtrzymajWynik + " punktow");
                     return;
                 }
                 // jesli pileczka uderzyla dolna krawedz planszy mniej niz 3 razy to jest gra kontynuowana
                 ball_pileczka.Left = (form.ClientSize.Width - ball_pileczka.Width) / 2;
                 ball_pileczka.Top = (form.ClientSize.Height - ball_pileczka.Height) / 2;
+
+                if (LostBalls_UtraconePileczki == 1)
+                {
+                    Score_Wynik.GameOver_KoniecGry = false;
+                    MessageBox.Show("=> Be careful! You have 2 remaining balls :/\n=> Badz ostrozny! Pozostaly Tobie juz 2 pileczki :/\n" +
+                        "\n=> Be careful! Act fast if you want to live! ;p\n=> Badz ostrozny! Dzialaj szybko, jesli chcesz zyc! ;p");
+                    return;
+                }
+                if (LostBalls_UtraconePileczki == 2)
+                {
+                    Score_Wynik.GameOver_KoniecGry = false;
+                    MessageBox.Show("Oh no! You have only 1 ball left :x / O nie! Masz już tylko 1 pileczke :x\n" +
+                        "\n=> Be careful! Act fast if you want to live! ;p\n=> Badz ostrozny! Dzialaj szybko, jesli chcesz zyc! ;p");
+                    return;
+                }
             }
 
             // sprawdzenie, czy pileczka uderzyla w gorna krawedz formularza / planszy [form]

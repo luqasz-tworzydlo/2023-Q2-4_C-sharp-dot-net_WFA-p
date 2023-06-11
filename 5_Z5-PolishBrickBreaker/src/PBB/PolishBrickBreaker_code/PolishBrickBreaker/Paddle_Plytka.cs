@@ -54,8 +54,10 @@ namespace PolishBrickBreaker
             {
                 PlayerPaddles_PlytkiGracza.Add(new PictureBox()
                 {
-                    BackColor = Color.DarkOrange, // ustawienie koloru dla naszej plytki
-                    Height = 11, // ustawienie wysokosci naszej plyki [czyli u nas to 11]
+                    // DarkViolet zostal zainspirowany kolorem teczy 'violet'
+                    // kolory teczy [ang]: red, orange, yellow, green, blue, indigo, violet
+                    BackColor = Color.DarkViolet, // ustawienie koloru dla naszej plytki
+                    Height = 12, // ustawienie wysokosci naszej plyki [czyli u nas to 12]
                     Visible = true, // ustawienie, aby nasza plytka byla widoczna na planszy
                     Width = 30, // ustawienie szerokosci plytki [laczna szerokosc to bedzie 90]
                     Top = form.ClientSize.Height - 11, // ustawienie polozenia naszej plytki na wysokosci

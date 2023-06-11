@@ -15,7 +15,7 @@ namespace PolishBrickBreaker
     {
         // generowanie (inicjowanie) i wyświetlanie cegielek
         List<Brick_Cegielka> bricks;
-        const int NumberOfBricks_NumerCegielek = 20;
+        const int NumberOfBricks_NumerCegielek = 18;
 
         // stworzenie naszej plytki na formularzu [planszy]
         Paddle_Plytka paddle_plytka;
@@ -26,6 +26,11 @@ namespace PolishBrickBreaker
         // konstruktor naszego formularza [planszy]
         public PolishBrickBreaker()
         {
+            MessageBox.Show("This is PolishBrickBreaker game! *_* / To jest gra PolishBrickBreaker! *_*\n" +
+                "\n=> Game made by: / Gra wykonana przez: Lukasz W. M. Tworzydlo <'_'>\n" +
+                "\n=> I hope you will like this game! ^_^" +
+                "\n=> Mam nadzieje, ze spodoba sie Tobie gra ^_^");
+            MessageBox.Show("Good Luck! You have 3 balls ;> / Powodzenia! Masz 3 pileczki ;>");
             InitializeComponent();
             bricks = new List<Brick_Cegielka>();
             paddle_plytka = new Paddle_Plytka(this);
@@ -54,7 +59,7 @@ namespace PolishBrickBreaker
         }
 
         // sprawdzenie, czy trwa nadal nasza gra
-        private void Timer_Tick(object sender, EventArgs e)
+        public void Timer_Tick(object sender, EventArgs e)
         {
             // sprawdzenie, czy jest koniec gry
             if (Score_Wynik.GameOver_KoniecGry)
@@ -70,31 +75,56 @@ namespace PolishBrickBreaker
             // punktow to wtedy ruch naszej pileczki jest wiekszy
             // (czyli pileczka szybciej porusza sie na planszy
             // [form]), jak i rowniez predkosc poruszania plytki
-            if (Score_Wynik.GetScore_OtrzymajWynik >= 20)
+            if (Score_Wynik.GetScore_OtrzymajWynik >= 50)
             {
                 // podniesiona predkosc naszej pileczki na planszy [form]
-                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 10;
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 12;
                 // podniesiona predkosc poruszania plytki na planszy
+                paddle_plytka.Speed_Predkosc = 12;
+            }
+            if (Score_Wynik.GetScore_OtrzymajWynik >= 45)
+            {
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 11;
+                paddle_plytka.Speed_Predkosc = 11;
+            }
+            if (Score_Wynik.GetScore_OtrzymajWynik >= 40)
+            {
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 10;
                 paddle_plytka.Speed_Predkosc = 10;
+            }
+            if (Score_Wynik.GetScore_OtrzymajWynik >= 35)
+            {
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 9;
+                paddle_plytka.Speed_Predkosc = 9;
+            }
+            if (Score_Wynik.GetScore_OtrzymajWynik >= 30)
+            {
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 8;
+                paddle_plytka.Speed_Predkosc = 8;
+            }
+            else if (Score_Wynik.GetScore_OtrzymajWynik >= 25)
+            {
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 7;
+                paddle_plytka.Speed_Predkosc = 7;
+            }
+            else if (Score_Wynik.GetScore_OtrzymajWynik >= 20)
+            {
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 6;
+                paddle_plytka.Speed_Predkosc = 6;
             }
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 15)
             {
-                // podniesiona predkosc naszej pileczki na planszy [form]
                 ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 5;
-                // podniesiona predkosc poruszania plytki na planszy
-                paddle_plytka.Speed_Predkosc = 6;
+                paddle_plytka.Speed_Predkosc = 5;
             }
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 10)
             {
-                // podniesiona predkosc naszej pileczki na planszy [form]
                 ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 3;
             }
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 5)
             {
-                // podniesiona predkosc naszej pileczki na planszy [form]
                 ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 1;
             }
-
         }
     }
 }

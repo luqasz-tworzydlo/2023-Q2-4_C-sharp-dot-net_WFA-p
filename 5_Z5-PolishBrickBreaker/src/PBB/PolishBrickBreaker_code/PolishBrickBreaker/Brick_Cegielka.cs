@@ -30,8 +30,9 @@ namespace PolishBrickBreaker
             brick = new PictureBox()
             {
                 BackColor = GetColor_PobierzKolor(rand_los.Next(1, 7)),
-                Width = rand_los.Next(50, 101),
-                Height = rand_los.Next(10, 26),
+                Width = rand_los.Next(50, 101), // tworzenie losowej szerokosci
+                // Height = rand_los.Next(10, 26), // tworzenie losowej wysokosci
+                Height = 15, // tworzenie konkretnej szerokosci cegielek [bricks]
                 Tag = "Brick_Cegielka",
                 Visible = true
             };
@@ -39,6 +40,7 @@ namespace PolishBrickBreaker
             initialize_inicjowanie();
         }
 
+        // wybrane kolory teczy [ang]: red, orange, yellow, green, blue, indigo, violet
         // metoda odnoszaca sie do kolorowania cegielek na planszy
         private Color GetColor_PobierzKolor(int c)
         {
@@ -46,22 +48,22 @@ namespace PolishBrickBreaker
             switch(c)
             {
                 case 1:
-                    color_kolor = Color.Blue;
+                    color_kolor = Color.Indigo;
                     break;
                 case 2:
-                    color_kolor = Color.Red;
+                    color_kolor = Color.Blue;
                     break;
                 case 3:
-                    color_kolor = Color.Purple;
+                    color_kolor = Color.Green;
                     break;
                 case 4:
                     color_kolor = Color.Yellow;
                     break;
                 case 5:
-                    color_kolor = Color.Green;
+                    color_kolor = Color.Orange;
                     break;
                 default:
-                    color_kolor = Color.Black;
+                    color_kolor = Color.Red;
                     break;
             }
 

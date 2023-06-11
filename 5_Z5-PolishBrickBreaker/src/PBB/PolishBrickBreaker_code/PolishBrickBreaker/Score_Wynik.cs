@@ -39,18 +39,19 @@ namespace PolishBrickBreaker
             set;
         }
 
+        // wybrane kolory teczy [ang]: red, orange, yellow, green, blue, indigo, violet
         // metoda odnoszaca sie do obliczania wyniku
         public static void CalculateScore_ObliczWynik (PictureBox brick, PolishBrickBreaker form)
         {
-            if (brick.BackColor == Color.Blue)
+            if (brick.BackColor == Color.Indigo)
                 TotalScore_CalkowityWynik += 1;
-            else if (brick.BackColor == Color.Red)
+            else if (brick.BackColor == Color.Blue)
                 TotalScore_CalkowityWynik += 2;
-            else if (brick.BackColor == Color.Purple)
+            else if (brick.BackColor == Color.Green)
                 TotalScore_CalkowityWynik += 3;
             else if (brick.BackColor == Color.Yellow)
                 TotalScore_CalkowityWynik += 4;
-            else if (brick.BackColor == Color.Green)
+            else if (brick.BackColor == Color.Orange)
                 TotalScore_CalkowityWynik += 5;
             else // odnosi to sie do czarnego koloru
                 TotalScore_CalkowityWynik += 6;
