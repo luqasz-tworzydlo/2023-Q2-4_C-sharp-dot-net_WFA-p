@@ -131,8 +131,7 @@ namespace PolishBrickBreaker
                     // odwrocenie kierunku, w ktorym bedzie dalej isc pileczka,
                     // a wiec ustalenie, jaki przybierze kierunek pileczka
                     // po uderzeniu obiektu [po zbiciu cegielki] pileczka
-                    // SpeedY_PredkoscY = SpeedY_PredkoscY * (-1) - SpeedY_PredkoscY;
-                    SpeedY_PredkoscY *= -1; // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    SpeedY_PredkoscY *= -1;
                 }
             }
 
@@ -185,8 +184,8 @@ namespace PolishBrickBreaker
                     return;
                 }
                 // jesli pileczka uderzyla dolna krawedz planszy mniej niz 3 razy to jest gra kontynuowana
-                ball_pileczka.Left = (form.ClientSize.Width - ball_pileczka.Width / 2);
-                ball_pileczka.Top = (form.ClientSize.Height - ball_pileczka.Height / 2);
+                ball_pileczka.Left = (form.ClientSize.Width - ball_pileczka.Width) / 2;
+                ball_pileczka.Top = (form.ClientSize.Height - ball_pileczka.Height) / 2;
             }
 
             // sprawdzenie, czy pileczka uderzyla w gorna krawedz formularza / planszy [form]
@@ -194,7 +193,7 @@ namespace PolishBrickBreaker
             // jest odbita w przeciwnym kierunku, z ktorego przyszla pileczka
             else if (ball_pileczka.Top <= 0)
             {
-                SpeedY_PredkoscY = SpeedY_PredkoscY * (-1) - SpeedY_PredkoscY;
+                SpeedY_PredkoscY *= -1;
             }
             // sprawdzenie, czy pileczka uderzyla prawa badz lewa grawedx formularza / planszy [form]
             // => jesli uderzyla lewa krawedz to wtedy jest odbita w przeciwnym kierunku, od ktorego przyszla

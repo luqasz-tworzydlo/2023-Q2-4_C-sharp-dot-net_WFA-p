@@ -66,16 +66,16 @@ namespace PolishBrickBreaker
 
             // jesli nie ma konca gry to gra jest kontynuowana
             ball_pileczka.MoveBall_RuchPileczki(); // ruch pileczki
-            // jesli wynik jest równy bądź większy niz 20 punktow
-            // to wtedy ruch naszej pileczki jest wiekszy (czyli
-            // pileczka szybciej porusza sie na planszy [form]),
-            // jak i rowniez predkosc poruszania plytki
+            // jesli wynik jest równy bądź większy niz okreslona ilosc
+            // punktow to wtedy ruch naszej pileczki jest wiekszy
+            // (czyli pileczka szybciej porusza sie na planszy
+            // [form]), jak i rowniez predkosc poruszania plytki
             if (Score_Wynik.GetScore_OtrzymajWynik >= 20)
             {
                 // podniesiona predkosc naszej pileczki na planszy [form]
-                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 7;
+                ball_pileczka.IncreasedSpeed_PodniesionaPredkosc = 10;
                 // podniesiona predkosc poruszania plytki na planszy
-                paddle_plytka.Speed_Predkosc = 7;
+                paddle_plytka.Speed_Predkosc = 10;
             }
             else if (Score_Wynik.GetScore_OtrzymajWynik >= 15)
             {
