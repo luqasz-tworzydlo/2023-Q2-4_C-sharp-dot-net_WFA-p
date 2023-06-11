@@ -1,0 +1,11 @@
+C:\Users\luqasz\source\repos\SimpleSudokuGame\SimpleSudokuGame\obj\Debug\SimpleSudokuGame.csproj.AssemblyReference.cache
+C:\Users\luqasz\source\repos\SimpleSudokuGame\SimpleSudokuGame\obj\Debug\SimpleSudokuGame.csproj.SuggestedBindingRedirects.cache
+C:\Users\luqasz\source\repos\SimpleSudokuGame\SimpleSudokuGame\obj\Debug\SimpleSudokuGame.Properties.Resources.resources
+C:\Users\luqasz\source\repos\SimpleSudokuGame\SimpleSudokuGame\obj\Debug\SimpleSudokuGame.csproj.GenerateResource.cache
+C:\Users\luqasz\source\repos\SimpleSudokuGame\SimpleSudokuGame\obj\Debug\SimpleSudokuGame.csproj.CoreCompileInputs.cache
+C:\Users\luqasz\source\repos\SimpleSudokuGame\SimpleSudokuGame\bin\Debug\SimpleSudokuGame.exe.config
+C:\Users\luqasz\source\repos\SimpleSudokuGame\SimpleSudokuGame\bin\Debug\SimpleSudokuGame.exe
+C:\Users\luqasz\source\repos\SimpleSudokuGame\SimpleSudokuGame\bin\Debug\SimpleSudokuGame.pdb
+C:\Users\luqasz\source\repos\SimpleSudokuGame\SimpleSudokuGame\obj\Debug\SimpleSudokuGame.exe
+C:\Users\luqasz\source\repos\SimpleSudokuGame\SimpleSudokuGame\obj\Debug\SimpleSudokuGame.pdb
+C:\Users\luqasz\source\repos\SimpleSudokuGame\SimpleSudokuGame\obj\Debug\SimpleSudokuGame.Form1.resources
