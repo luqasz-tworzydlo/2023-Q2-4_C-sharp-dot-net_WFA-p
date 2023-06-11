@@ -97,6 +97,26 @@ namespace PolishBrickBreaker
                 return;
             }*/
 
+            // poruszanie sie pileczki na formularzu / planszy [form] - nadanie predkosci na osi X
+            if (SpeedX_PredkoscX < 0)
+            {
+                ball_pileczka.Left += SpeedX_PredkoscX - IncreasedSpeed_PodniesionaPredkosc;
+            }
+            else if (SpeedX_PredkoscX > 0)
+            {
+                ball_pileczka.Left += SpeedX_PredkoscX + IncreasedSpeed_PodniesionaPredkosc;
+            }
+
+            // poruszanie sie pileczki na formularzu / planszy [form] - nadanie predkosci na osi Y
+            if (SpeedY_PredkoscY < 0)
+            {
+                ball_pileczka.Left += SpeedY_PredkoscY - IncreasedSpeed_PodniesionaPredkosc;
+            }
+            else if (SpeedY_PredkoscY > 0)
+            {
+                ball_pileczka.Left += SpeedY_PredkoscY + IncreasedSpeed_PodniesionaPredkosc;
+            }
+
             // sprawdzenie, czy gra sie skonczyla czy nie [sprawdzamy wszystkie cegielki]
             foreach(var item_obiekt in form.Controls.OfType<PictureBox>().Where(t => t.Tag == "Brick / Cegielka"))
             {
@@ -120,7 +140,12 @@ namespace PolishBrickBreaker
             {
                 // odbicie pileczki na lewo [w przypadku uderzenia pileczki w lewa czesc plytki]
                 SpeedY_PredkoscY = -SpeedY_PredkoscY; // zmienienie kierunku na osi Y
-                SpeedX_PredkoscX = Math.Abs(SpeedX_PredkoscX) * -1; // upewnienie sie,
+                // ustawienie predkosci dla pileczki, takze po podniesieniu
+                // predkosci w przypadku zbicia poszczegolnych cegielek
+                if (SpeedX_PredkoscX == 0)
+                    SpeedX_PredkoscX = -5 - IncreasedSpeed_PodniesionaPredkosc;
+                else
+                    SpeedX_PredkoscX = Math.Abs(SpeedX_PredkoscX) * -1; // upewnienie sie,
                 // ze pileczka zawsze odbije sie na lewa strone, bez wzgledu na to,
                 // czy bedzie isc z prawej czy z lewej strony na plytke [paddle],
                 // co zapewnia wbudowana funkcja w C#, czyli Math.Abs [!!!]
@@ -129,7 +154,12 @@ namespace PolishBrickBreaker
             {
                 // odbicie pileczki na prawo [w przypadku uderzenia pileczki w prawa czesc plytki]
                 SpeedY_PredkoscY = -SpeedY_PredkoscY; // zmienienie kierunku na osi Y
-                SpeedX_PredkoscX = Math.Abs(SpeedX_PredkoscX); // upewnienie sie,
+                // ustawienie predkosci dla pileczki, takze po podniesieniu
+                // predkosci w przypadku zbicia poszczegolnych cegielek
+                if (SpeedX_PredkoscX == 0)
+                    SpeedX_PredkoscX = 5 + IncreasedSpeed_PodniesionaPredkosc;
+                else
+                    SpeedX_PredkoscX = Math.Abs(SpeedX_PredkoscX); // upewnienie sie,
                 // ze pileczka zawsze odbije sie na prawa strone, bez wzgledu na to,
                 // czy bedzie isc z prawej czy z lewej strony na plytke [paddle],
                 // co zapewnia wbudowana funkcja w C#, czyli Math.Abs [!!!]
@@ -140,6 +170,37 @@ namespace PolishBrickBreaker
                 // odbicie pileczki w gore [w przypadku uderzenia pileczki w srodkowa czesc plytki]
                 SpeedY_PredkoscY = -SpeedY_PredkoscY; // zmienienie kierunku na osi Y
                 SpeedX_PredkoscX = 0; // pileczka zawsze odbije sie w gore na osi X
+            }
+
+            // sprawdzenie, czy pileczka uderzyla dolna krawedz formularza / planszy [form]
+            else if (ball_pileczka.Bottom >= form.ClientSize.Height)
+            {
+                LostBalls_UtraconePileczki += 1;
+                // jesli pileczka uderzyla dolna krawedz planszy 3 razy to jest koniec gry
+                if (LostBalls_UtraconePileczki == 3)
+                {
+                    Score_Wynik.GameOver_KoniecGry = true;
+                    MessageBox.Show("Game Over! You lose... :< / Koniec gry! Przegrales... :<");
+                    return;
+                }
+                // jesli pileczka uderzyla dolna krawedz planszy mniej niz 3 razy to jest gra kontynuowana
+                ball_pileczka.Left = (form.ClientSize.Width - ball_pileczka.Width / 2);
+                ball_pileczka.Top = (form.ClientSize.Height - ball_pileczka.Height / 2);
+            }
+
+            // sprawdzenie, czy pileczka uderzyla w gorna krawedz formularza / planszy [form]
+            // => jesli pileczka uderzyla gorna krawedz formularza to wtedy pileczka
+            // jest odbita w przeciwnym kierunku, z ktorego przyszla pileczka
+            else if (ball_pileczka.Top <= 0)
+            {
+                SpeedY_PredkoscY *= -1;
+            }
+            // sprawdzenie, czy pileczka uderzyla prawa badz lewa grawedx formularza / planszy [form]
+            // => jesli uderzyla lewa krawedz to wtedy jest odbita w przeciwnym kierunku, od ktorego przyszla
+            // => jesli uderzyla prawa krawedz to wtedy jest odbita w przeciwnym kiedunku, od ktorego przyszla
+            else if (ball_pileczka.Left <= 0 || ball_pileczka.Right >= form.ClientSize.Width)
+            {
+                SpeedX_PredkoscX *= -1;
             }
         }
     }
